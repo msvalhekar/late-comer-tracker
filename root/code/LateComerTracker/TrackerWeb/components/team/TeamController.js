@@ -1,3 +1,3 @@
-﻿function UserController($scope) {
+﻿function TeamController($scope) {
     $scope.testText = "Hello Buddy !!!";
 }
