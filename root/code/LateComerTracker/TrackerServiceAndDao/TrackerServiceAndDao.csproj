@@ -7,8 +7,8 @@
     <ProjectGuid>{C3B97400-DC5B-493D-8125-A590E9B938E2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LateComerTracker.Dao</RootNamespace>
-    <AssemblyName>LateComerTracker.Dao</AssemblyName>
+    <RootNamespace>LateComerTracker.Backend</RootNamespace>
+    <AssemblyName>LateComerTracker.Backend</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,13 +39,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dao\BaseDao.cs" />
+    <Compile Include="Model\Employee.cs" />
+    <Compile Include="Model\Team.cs" />
+    <Compile Include="Service\EmployeeService.cs" />
+    <Compile Include="Dao\TeamDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserDao.cs" />
+    <Compile Include="Dao\EmployeeDao.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TrackerModels\TrackerModels.csproj">
-      <Project>{95cbf602-7a3b-49a4-a073-c6f8457707f2}</Project>
-      <Name>TrackerModels</Name>
+    <ProjectReference Include="..\TrackerDataAccess\TrackerDataAccess.csproj">
+      <Project>{0189fad6-a132-443f-bc43-ef1748ef4cab}</Project>
+      <Name>TrackerDataAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

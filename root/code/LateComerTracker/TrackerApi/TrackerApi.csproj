@@ -60,7 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\EmploeeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -81,16 +81,9 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TrackerModels\TrackerModels.csproj">
-      <Project>{95cbf602-7a3b-49a4-a073-c6f8457707f2}</Project>
-      <Name>TrackerModels</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TrackerService\TrackerService.csproj">
-      <Project>{89b2b0db-f85e-49a7-b3b1-8ba091fd3593}</Project>
-      <Name>TrackerService</Name>
+    <ProjectReference Include="..\TrackerServiceAndDao\TrackerServiceAndDao.csproj">
+      <Project>{C3B97400-DC5B-493D-8125-A590E9B938E2}</Project>
+      <Name>TrackerServiceAndDao</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

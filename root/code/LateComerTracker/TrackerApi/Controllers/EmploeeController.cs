@@ -1,17 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
-using LateCommerTracker.Service;
-using TrackerModels;
+using LateComerTracker.Backend.Model;
+using LateComerTracker.Backend.Service;
 
 namespace LateComerTracker.Api.Controllers
 {
-    public class UserController : ApiController
+    public class EmploeeController : ApiController
     {
         // GET api/user
-        public IEnumerable<User> Get()
+        public IEnumerable<Employee> Get()
         {
-            var userService = new UserService();
-            return userService.GetUsers();
+            return new EmployeeService().GetEmployees();
         }
 
         // GET api/user/5

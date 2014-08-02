@@ -7,8 +7,8 @@
     <ProjectGuid>{E335F48A-CED4-4B10-801B-E0B5D5287FBF}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TrackerMigrator</RootNamespace>
-    <AssemblyName>TrackerMigrator</AssemblyName>
+    <RootNamespace>LateComerTracker.Migrator</RootNamespace>
+    <AssemblyName>LateComerTracker.Migrator</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,6 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,6 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="20140802183305_CreateTeamTable.cs" />
+    <Compile Include="BaseMigration.cs" />
+    <Compile Include="20140802194036_CreateEmployeeTable.cs" />
+    <Compile Include="20140802194215_CreateTeamEmployeeTable.cs" />
+    <Compile Include="MigrationAttribute.cs" />
+    <Compile Include="MigrationEngine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -48,7 +55,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="sql\20140731135100_CreateUsersTable.sql" />
+    <ProjectReference Include="..\TrackerDataAccess\TrackerDataAccess.csproj">
+      <Project>{0189FAD6-A132-443F-BC43-EF1748EF4CAB}</Project>
+      <Name>TrackerDataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TrackerServiceAndDao\TrackerServiceAndDao.csproj">
+      <Project>{c3b97400-dc5b-493d-8125-a590e9b938e2}</Project>
+      <Name>TrackerServiceAndDao</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

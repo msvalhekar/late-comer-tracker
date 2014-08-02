@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
-using TrackerModels;
+using LateComerTracker.Backend.Model;
 
-namespace LateComerTracker.Dao
+namespace LateComerTracker.Backend.Dao
 {
-    public class UserDao
+    public class EmployeeDao
     {
-        public IList<User> GetUsers()
+        public IList<Employee> GetEmployees()
         {
-            return new List<User>
+            return new List<Employee>
             {
-                new User
+                new Employee
                 {
                     Id = 1,
                     Name = "Meenalkumar",
@@ -17,7 +17,7 @@ namespace LateComerTracker.Dao
                     UnsettledPoints = 0,
                     SettledPenalties = 0
                 },
-                new User
+                new Employee
                 {
                     Id = 1,
                     Name = "Mohan",
