@@ -1,31 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using LateComerTracker.Backend.Model;
 
 namespace LateComerTracker.Backend.Dao
 {
-    public class EmployeeDao
+    public class EmployeeDao : BaseDao
     {
-        public IList<Employee> GetEmployees()
+        public IList<Employee> GetAllEmployees()
         {
-            return new List<Employee>
-            {
-                new Employee
+            var table = GetDataTable("select emp_id, emp_name, emp_emailId from Employee");
+
+            return (from DataRow row in table.Rows
+                select new Employee
                 {
-                    Id = 1,
-                    Name = "Meenalkumar",
-                    TotalPoints = 0,
-                    UnsettledPoints = 0,
-                    SettledPenalties = 0
-                },
-                new Employee
-                {
-                    Id = 1,
-                    Name = "Mohan",
-                    TotalPoints = 15,
-                    UnsettledPoints = 4,
-                    SettledPenalties = 2
-                }
-            };
+                    Id = Convert.ToInt32(row["emp_id"]), 
+                    Name = row["emp_name"].ToString(), 
+                    EmailId = row["emp_emailId"].ToString()
+                }).ToList();
         }
     }
 }

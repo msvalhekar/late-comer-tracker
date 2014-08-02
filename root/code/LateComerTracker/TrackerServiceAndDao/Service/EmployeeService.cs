@@ -6,9 +6,9 @@ namespace LateComerTracker.Backend.Service
 {
     public class EmployeeService
     {
-        public IList<Employee> GetEmployees()
+        public IList<Employee> GetAllEmployees()
         {
-            return new EmployeeDao().GetEmployees();
+            return new EmployeeDao().GetAllEmployees();
         }
     }
 }

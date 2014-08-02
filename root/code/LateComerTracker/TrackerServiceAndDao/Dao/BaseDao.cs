@@ -7,8 +7,9 @@ namespace LateComerTracker.Backend.Dao
     {
         private readonly DataAccessObject _dataAccess;
 
-        public BaseDao(string connString)
+        public BaseDao()
         {
+            const string connString = "Data Source=localhost;Initial Catalog=tracker;User Id=SQLConnect;Password=Pench2006;";
             _dataAccess = new DataAccessObject(connString);
         }
 

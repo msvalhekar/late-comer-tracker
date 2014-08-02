@@ -42,6 +42,7 @@
     <Compile Include="Dao\BaseDao.cs" />
     <Compile Include="Model\Employee.cs" />
     <Compile Include="Model\Team.cs" />
+    <Compile Include="Service\TeamService.cs" />
     <Compile Include="Service\EmployeeService.cs" />
     <Compile Include="Dao\TeamDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

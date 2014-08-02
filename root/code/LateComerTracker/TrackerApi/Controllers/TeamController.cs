@@ -5,18 +5,18 @@ using LateComerTracker.Backend.Service;
 
 namespace LateComerTracker.Api.Controllers
 {
-    public class EmployeeController : ApiController
+    public class TeamController : ApiController
     {
         // GET api/user
-        public IEnumerable<Employee> Get()
+        public IEnumerable<Team> Get()
         {
-            return new EmployeeService().GetAllEmployees();
+            return new TeamService().GetAllTeams();
         }
 
         // GET api/user/5
-        public string Get(int id)
+        public Team Get(int id)
         {
-            return "value";
+            return new TeamService().GetTeam(id);
         }
 
         // POST api/user
