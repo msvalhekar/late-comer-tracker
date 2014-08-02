@@ -11,6 +11,7 @@
                                        + ",[emp_name] [nvarchar](20) NOT NULL"
                                        + ",[emp_emailId] [nvarchar](50) NOT NULL"
                                        + ",CONSTRAINT PK_Employee_Id PRIMARY KEY (emp_id)"
+                                       + ",CONSTRAINT UK_Employee_emailId UNIQUE (emp_emailId)"
                                        + ")";
 
             ExecuteNonQuery(commantText);
