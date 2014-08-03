@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 
-namespace LateComerTracker.Api.App_Start
+namespace LateComerTracker.Web.App_Start
 {
     public static class WebApiConfig
     {

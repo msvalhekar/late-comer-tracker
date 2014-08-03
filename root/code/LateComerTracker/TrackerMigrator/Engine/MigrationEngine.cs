@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -7,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using LateComerTracker.DataAccess;
 
-namespace LateComerTracker.Migrator
+namespace LateComerTracker.Migrator.Engine
 {
     class MigrationEngine
     {

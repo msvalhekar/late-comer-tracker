@@ -1,7 +1,7 @@
 ﻿using System.Configuration;
 using LateComerTracker.DataAccess;
 
-namespace LateComerTracker.Migrator
+namespace LateComerTracker.Migrator.Engine
 {
     abstract class BaseMigration
     {

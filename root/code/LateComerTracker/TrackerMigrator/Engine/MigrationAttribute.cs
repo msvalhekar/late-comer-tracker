@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LateComerTracker.Migrator
+namespace LateComerTracker.Migrator.Engine
 {
     class MigrationAttribute : Attribute
     {

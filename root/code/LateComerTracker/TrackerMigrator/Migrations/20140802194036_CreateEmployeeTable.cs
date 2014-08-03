@@ -1,4 +1,6 @@
-﻿namespace LateComerTracker.Migrator
+﻿using LateComerTracker.Migrator.Engine;
+
+namespace LateComerTracker.Migrator.Migrations
 {
     [Migration(20140802194036)]
     class _20140802194036_CreateEmployeeTable : BaseMigration

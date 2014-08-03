@@ -1,4 +1,5 @@
 ﻿using System;
+using LateComerTracker.Migrator.Engine;
 
 namespace LateComerTracker.Migrator
 {
@@ -6,9 +7,20 @@ namespace LateComerTracker.Migrator
     {
         static void Main(string[] args)
         {
-            new MigrationEngine().Run(null); // Up
-            //new MigrationEngine().Run(0); // down to zero
-            //new MigrationEngine().Run(20140802194036); // down to zero
+            // ----------------------------------
+            // | Migrate to |   Arguments       |
+            // ---------------------------------|
+            // | Latest     | nothing           |
+            // | Empty Db   | 0                 |
+            // | Migration  | <migrationNumber> |
+            // ----------------------------------
+
+            long? migNumber = null;
+            if (0 < args.Length) migNumber = Convert.ToInt64(args[0]);
+
+            new MigrationEngine().Run(migNumber);
+            
+            Console.WriteLine("\nHit 'Enter' to exit.");
             Console.ReadLine();
         }
     }

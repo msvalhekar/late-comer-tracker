@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
-using LateComerTracker.Backend.Model;
+using LateComerTracker.Backend.Models;
 
-namespace LateComerTracker.Backend.Dao
+namespace LateComerTracker.Backend.DAOs
 {
     public class TeamDao : BaseDao
     {
@@ -23,15 +24,25 @@ namespace LateComerTracker.Backend.Dao
 
         public Team GetTeam(int id)
         {
+            return GetTeamWhere(new KeyValuePair<string, string>("team_id", id.ToString(CultureInfo.InvariantCulture)));
+        }
+
+        public Team GetTeam(string name)
+        {
+            return GetTeamWhere(new KeyValuePair<string, string>("team_name", "'" + name + "'"));
+        }
+
+        private Team GetTeamWhere(KeyValuePair<string, string> wherePair)
+        {
             var commandText = "select t.team_id, t.team_name, t.team_description, e.emp_id, e.emp_name, e.emp_emailId from Team t"
-                + " left join TeamEmployee te on te.team_id = t.team_id"
-                + " left join Employee e on e.emp_id = te.emp_id"
-                + " where t.team_id = " + id;
-            var table = GetDataTable(commandText);
+                              + " left join TeamEmployee te on te.team_id = t.team_id"
+                              + " left join Employee e on e.emp_id = te.emp_id"
+                              + " where t." + wherePair.Key + " = " + wherePair.Value;
 
-            if (table.Rows.Count == 0) return null;
+            var dataTable = GetDataTable(commandText);
+            if (dataTable == null || dataTable.Rows.Count == 0) return null;
 
-            var row = table.Rows[0];
+            var row = dataTable.Rows[0];
             var team = new Team
             {
                 Id = Convert.ToInt32(row["team_id"]),
@@ -41,9 +52,9 @@ namespace LateComerTracker.Backend.Dao
             };
 
             // join and fetch associated Empolyees
-            foreach (DataRow dataRow in table.Rows)
+            foreach (DataRow dataRow in dataTable.Rows)
             {
-                if (dataRow["emp_id"] == null) break;
+                if (Convert.IsDBNull(dataRow["emp_id"])) break;
 
                 team.Employees.Add(new Employee
                 {
@@ -51,6 +62,20 @@ namespace LateComerTracker.Backend.Dao
                     Name = dataRow["emp_name"].ToString(),
                     EmailId = dataRow["emp_emailId"].ToString()
                 });
+            }
+            return team;
+        }
+
+        public Team AddTeam(Team team)
+        {
+            if (team == null) return null;
+
+            var commandText = string.Format("INSERT INTO Team (team_name, team_description) VALUES ('{0}', '{1}')",
+                team.Name, team.Description);
+
+            if (-1 < ExecuteNonQuery(commandText))
+            {
+                return GetTeam(team.Name);
             }
             return team;
         }

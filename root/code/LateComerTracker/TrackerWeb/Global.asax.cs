@@ -1,7 +1,7 @@
 ﻿using System.Web.Http;
-using LateComerTracker.Api.App_Start;
+using LateComerTracker.Web.App_Start;
 
-namespace LateComerTracker.Api
+namespace LateComerTracker.Web
 {
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
