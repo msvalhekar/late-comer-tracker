@@ -1,7 +1,29 @@
-﻿function TeamController($scope) {
-    $scope.testText = "Hello Buddy !!!";
+﻿
+(function () {
 
-    $.post("/api/teams", { Name: 'testName', Description: 'dont know' }, function (data) {
-        if (data) $scope.testText = data.Name;
-    });
-}
+    // ------- All Teams
+    function teamsController($scope, trackerService) {
+
+        var promise = trackerService.getTeams();
+
+        promise.then(function (data) {
+            $scope.teams = data;
+        }, function (error) {
+        });
+    }
+    
+    trackerApp.controller("teamsController", teamsController);
+
+    // ------- Single Team Details
+    function teamController($scope, $routeParams, trackerService) {
+
+        var promise = trackerService.getTeam($routeParams.id);
+
+        promise.then(function (data) {
+            $scope.team = data;
+        }, function (error) {
+        });
+    }
+    
+    trackerApp.controller("teamController", teamController);
+})();

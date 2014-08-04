@@ -1,3 +1,16 @@
-﻿<div>
-    {{testText}}
+﻿<div class="col-sm-4">
+    <div>
+        <div><b>Name</b> : {{team.Name}}</div>
+        <div><b>Description</b> : {{team.Description}}</div>
+        <div><p>Employees</p>
+            <table class="table table-bordered table-striped">
+                <th>Name</th>
+                <th>EmailId</th>
+                <tr ng-repeat="employee in team.Employees">
+                    <td>{{employee.Name}}</td>
+                    <td>{{employee.EmailId}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </div>

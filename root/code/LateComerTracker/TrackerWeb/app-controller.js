@@ -2,20 +2,24 @@
 
 (function () {
 
-    var app = angular.module('lateTrackerApp', ['ngRoute']);
+    trackerApp = angular.module('lateTrackerApp', ['ngRoute']);
 
     var appController = function ($scope) {
         
     };
 
-    app.controller('appController', appController);
+    trackerApp.controller('appController', appController);
     
-    app.config(['$routeProvider',
+    trackerApp.config(['$routeProvider',
         function ($routeProvider) {
-            $routeProvider.
-                when('/team', {
+            $routeProvider
+                .when('/teams', {
+                    templateUrl: '/components/team/teams.html',
+                    controller: 'teamsController'
+                })
+                .when('/teams/:id', {
                     templateUrl: '/components/team/team.html',
-                    controller: 'TeamController'
+                    controller: 'teamController'
                 });
         }
     ]);
