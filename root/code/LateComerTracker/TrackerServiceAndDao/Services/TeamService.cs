@@ -25,5 +25,10 @@ namespace LateComerTracker.Backend.Services
         {
             return new TeamDao().AddTeam(team);
         }
+
+        public bool Delete(int id)
+        {
+            return new TeamDao().Delete(id);
+        }
     }
 }

@@ -35,8 +35,9 @@ namespace LateComerTracker.Web.ApiControllers
         {
         }
 
-        public void Delete(int id)
+        public bool Delete(int id)
         {
+            return new TeamService().Delete(id);
         }
     }
 }

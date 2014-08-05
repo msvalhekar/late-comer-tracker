@@ -4,9 +4,27 @@
     // ------- All Teams
     function teamsController($scope, trackerService) {
 
-        trackerService.getTeamsAsync(function (data) {
-            $scope.teams = data;
-        });
+        var getTeamAsync =  function() {
+            trackerService.getTeamsAsync(function (data) {
+                $scope.teams = data;
+            });
+        }
+        getTeamAsync();
+
+        $scope.addTeam = function() {
+            var newTeam = $scope.newTeam;
+            trackerService.postTeam(newTeam)
+                .then(function (team) {
+                    $scope.teams.push(team);
+                    $scope.newTeam = null;
+            });
+        };
+
+        $scope.deleteTeam = function (id) {
+            trackerService.deleteTeam(id).then(function () {
+                getTeamAsync();
+            });
+        }
 
         //var promise = trackerService.getTeams();
 
@@ -28,6 +46,8 @@
         }, function (error) {
         });
     }
+
+
     
     trackerApp.controller("teamController", teamController);
 })();

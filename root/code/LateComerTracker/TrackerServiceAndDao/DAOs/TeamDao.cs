@@ -51,7 +51,7 @@ namespace LateComerTracker.Backend.DAOs
 
             // join and fetch associated Empolyees
             var empIdsCommandText = "select te.emp_id from TeamEmployee te"
-                              + " where te." + wherePair.Key + " = " + wherePair.Value;
+                              + " where te.team_id = " + team.Id;
 
             var empIdsDataTable = GetDataTable(empIdsCommandText);
             if (0 < empIdsDataTable.Rows.Count)
@@ -78,6 +78,13 @@ namespace LateComerTracker.Backend.DAOs
                 return GetTeam(team.Name);
             }
             return team;
+        }
+
+        public bool Delete(int id)
+        {
+            var commandText = string.Format("DELETE team where team_id="+id);
+
+            return -1 < ExecuteNonQuery(commandText);
         }
     }
 }
