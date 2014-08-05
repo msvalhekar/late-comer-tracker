@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\20140804202034_CreateEmployeePointTable.cs" />
+    <Compile Include="Migrations\20140804211523_CreateMeetingTable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Engine\BaseMigration.cs" />

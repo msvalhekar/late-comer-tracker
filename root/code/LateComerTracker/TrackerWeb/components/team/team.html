@@ -1,14 +1,16 @@
 ﻿<div class="col-sm-4">
     <div>
-        <div><b>Name</b> : {{team.Name}}</div>
-        <div><b>Description</b> : {{team.Description}}</div>
-        <div><p>Employees</p>
+        <div><strong>Name : </strong>{{team.Name}}</div>
+        <div><strong>Description : </strong>{{team.Description}}</div>
+        <div><strong>Employees : </strong>
             <table class="table table-bordered table-striped">
                 <th>Name</th>
                 <th>EmailId</th>
+                <th>Unsettled Points</th>
                 <tr ng-repeat="employee in team.Employees">
                     <td>{{employee.Name}}</td>
                     <td>{{employee.EmailId}}</td>
+                    <td>{{employee.UnsettledPoints}}</td>
                 </tr>
             </table>
         </div>

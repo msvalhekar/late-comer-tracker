@@ -41,8 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAOs\BaseDao.cs" />
+    <Compile Include="DAOs\MeetingDao.cs" />
+    <Compile Include="Models\Meeting.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Team.cs" />
+    <Compile Include="Services\MeetingService.cs" />
     <Compile Include="Services\TeamService.cs" />
     <Compile Include="Services\EmployeeService.cs" />
     <Compile Include="DAOs\TeamDao.cs" />

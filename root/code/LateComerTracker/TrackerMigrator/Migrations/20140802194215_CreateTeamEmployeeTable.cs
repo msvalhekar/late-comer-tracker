@@ -11,8 +11,8 @@ namespace LateComerTracker.Migrator.Migrations
                                        + "("
                                        + " [team_id] [int] NOT NULL"
                                        + ",[emp_id] [int] NOT NULL"
-                                       + ",CONSTRAINT FK_TeamId_Team_Id FOREIGN KEY (team_id) REFERENCES Team(team_id)"
-                                       + ",CONSTRAINT FK_EmpId_Employee_Id FOREIGN KEY (emp_id) REFERENCES Employee(emp_id)"
+                                       + ",CONSTRAINT FK_TeamEmployee_TeamId_Team_Id FOREIGN KEY (team_id) REFERENCES Team(team_id)"
+                                       + ",CONSTRAINT FK_TeamEmployee_EmpId_Employee_Id FOREIGN KEY (emp_id) REFERENCES Employee(emp_id)"
                                        + ")";
 
             ExecuteNonQuery(commantText);

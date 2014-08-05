@@ -9,8 +9,8 @@ namespace LateComerTracker.Migrator
         {
             // ----------------------------------
             // | Migrate to |   Arguments       |
-            // ---------------------------------|
-            // | Latest     | nothing           |
+            // |------------|-------------------|
+            // | Latest     | nothing / null    |
             // | Empty Db   | 0                 |
             // | Migration  | <migrationNumber> |
             // ----------------------------------

@@ -60,6 +60,7 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiControllers\MeetingsController.cs" />
     <Compile Include="App_Start\ValidateModelAttribute.cs" />
     <Compile Include="ApiControllers\TeamsController.cs" />
     <Compile Include="ApiControllers\EmployeesController.cs" />
@@ -72,6 +73,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="app-controller.js" />
     <Content Include="app.js" />
+    <Content Include="components\meeting\MeetingController.js" />
+    <Content Include="components\meeting\meetings.html" />
     <Content Include="components\team\teams.html" />
     <Content Include="components\team\team.html" />
     <Content Include="components\team\TeamController.js" />

@@ -34,9 +34,7 @@ namespace LateComerTracker.Backend.DAOs
 
         private Team GetTeamWhere(KeyValuePair<string, string> wherePair)
         {
-            var commandText = "select t.team_id, t.team_name, t.team_description, e.emp_id, e.emp_name, e.emp_emailId from Team t"
-                              + " left join TeamEmployee te on te.team_id = t.team_id"
-                              + " left join Employee e on e.emp_id = te.emp_id"
+            var commandText = "select t.team_id, t.team_name, t.team_description from Team t"
                               + " where t." + wherePair.Key + " = " + wherePair.Value;
 
             var dataTable = GetDataTable(commandText);
@@ -52,17 +50,19 @@ namespace LateComerTracker.Backend.DAOs
             };
 
             // join and fetch associated Empolyees
-            foreach (DataRow dataRow in dataTable.Rows)
-            {
-                if (Convert.IsDBNull(dataRow["emp_id"])) break;
+            var empIdsCommandText = "select te.emp_id from TeamEmployee te"
+                              + " where te." + wherePair.Key + " = " + wherePair.Value;
 
-                team.Employees.Add(new Employee
+            var empIdsDataTable = GetDataTable(empIdsCommandText);
+            if (0 < empIdsDataTable.Rows.Count)
+            {
+                var employeeDao = new EmployeeDao();
+                foreach (DataRow dataRow in empIdsDataTable.Rows)
                 {
-                    Id = Convert.ToInt32(dataRow["emp_id"]),
-                    Name = dataRow["emp_name"].ToString(),
-                    EmailId = dataRow["emp_emailId"].ToString()
-                });
+                    team.Employees.Add(employeeDao.GetEmployee(Convert.ToInt32(dataRow["emp_id"])));
+                }
             }
+            
             return team;
         }
 

@@ -29,12 +29,18 @@ namespace LateComerTracker.Backend.DAOs
             var dataTable = GetDataTable(commandText);
             if (dataTable == null || dataTable.Rows.Count == 0) return null;
 
+            var empFineCommandText = "select unsettled_points from EmployeeFine"
+                + " where emp_id = " + id;
+
+            var unsettledPoints = ExecuteScalar(empFineCommandText);
+
             var row = dataTable.Rows[0];
             return new Employee
             {
                 Id = Convert.ToInt32(row["emp_id"]),
                 Name = row["emp_name"].ToString(),
-                EmailId = row["emp_emailId"].ToString()
+                EmailId = row["emp_emailId"].ToString(),
+                UnsettledPoints = unsettledPoints
             };
         }
     }

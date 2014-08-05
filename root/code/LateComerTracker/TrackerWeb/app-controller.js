@@ -13,6 +13,10 @@
     trackerApp.config(['$routeProvider',
         function ($routeProvider) {
             $routeProvider
+                .when('/meetings', {
+                    templateUrl: '/components/meeting/meetings.html',
+                    controller: 'meetingsController'
+                })
                 .when('/teams', {
                     templateUrl: '/components/team/teams.html',
                     controller: 'teamsController'

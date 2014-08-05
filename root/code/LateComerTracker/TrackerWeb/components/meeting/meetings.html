@@ -1,0 +1,12 @@
+﻿<div class="col-sm-4">
+    <table class="table table-striped table-bordered">
+            <th>Name</th>
+            <th>Description</th>
+            <th>Severity</th>
+        <tr ng-repeat="meeting in meetings">
+            <td><a href="#meetings/{{meeting.Id}}" >{{meeting.Name}}</a></td>
+            <td>{{meeting.Description}}</td>
+            <td>{{meeting.Severity}}</td>
+        </tr>
+    </table>
+</div>
