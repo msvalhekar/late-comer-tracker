@@ -10,8 +10,8 @@ namespace LateComerTracker.Migrator.Migrations
             const string commantText = "CREATE TABLE [dbo].[Employee]"
                                        + "("
                                        + " [emp_id] [int] NOT NULL IDENTITY(1,1)"
-                                       + ",[emp_name] [nvarchar](20) NOT NULL"
-                                       + ",[emp_emailId] [nvarchar](50) NOT NULL"
+                                       + ",[emp_name] [varchar](20) NOT NULL"
+                                       + ",[emp_emailId] [varchar](50) NOT NULL"
                                        + ",CONSTRAINT PK_Employee_Id PRIMARY KEY (emp_id)"
                                        + ",CONSTRAINT UK_Employee_emailId UNIQUE (emp_emailId)"
                                        + ")";

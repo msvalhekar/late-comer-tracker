@@ -73,8 +73,10 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="app-controller.js" />
     <Content Include="app.js" />
+    <Content Include="components\meeting\meetingService.js" />
     <Content Include="components\meeting\MeetingController.js" />
     <Content Include="components\meeting\meetings.html" />
+    <Content Include="components\team\teamService.js" />
     <Content Include="components\team\teams.html" />
     <Content Include="components\team\team.html" />
     <Content Include="components\team\TeamController.js" />

@@ -6,24 +6,24 @@ namespace LateComerTracker.Backend.Services
 {
     public class TeamService
     {
-        public IList<Team> GetAllTeams()
+        public IList<Team> GetAll()
         {
-            return new TeamDao().GetAllTeams();
+            return new TeamDao().GetAll();
         }
 
-        public Team GetTeam(int id)
+        public Team Get(int id)
         {
-            return new TeamDao().GetTeam(id);
+            return new TeamDao().Get(id);
         }
 
-        public Team GetTeam(string name)
+        public Team Get(string name)
         {
-            return new TeamDao().GetTeam(name);
+            return new TeamDao().Get(name);
         }
 
-        public Team AddTeam(Team team)
+        public Team Add(Team team)
         {
-            return new TeamDao().AddTeam(team);
+            return new TeamDao().Add(team);
         }
 
         public bool Delete(int id)

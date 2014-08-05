@@ -11,22 +11,22 @@ namespace LateComerTracker.Web.ApiControllers
     {
         public IEnumerable<Team> Get()
         {
-            return new TeamService().GetAllTeams();
+            return new TeamService().GetAll();
         }
 
         public Team Get(int id)
         {
-            return new TeamService().GetTeam(id);
+            return new TeamService().Get(id);
         }
 
         public Team GetByName(string name)
         {
-            return new TeamService().GetTeam(name);
+            return new TeamService().Get(name);
         }
 
         public Team Post(Team team)
         {
-            team = new TeamService().AddTeam(team);
+            team = new TeamService().Add(team);
             if (team.Id == 0) return null;
             return team;
         }

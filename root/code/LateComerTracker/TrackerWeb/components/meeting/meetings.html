@@ -1,12 +1,35 @@
-﻿<div class="col-sm-4">
+﻿<div class="col-sm-8">
     <table class="table table-striped table-bordered">
-            <th>Name</th>
-            <th>Description</th>
-            <th>Severity</th>
+        <thead>
+            <tr>
+                <th class="col-sm-4">Name</th>
+                <th class="col-sm-4">Description</th>
+                <th class="col-sm-2">Severity</th>
+                <th class="col-sm-2">Action</th>
+            </tr>
+        </thead>
         <tr ng-repeat="meeting in meetings">
             <td><a href="#meetings/{{meeting.Id}}" >{{meeting.Name}}</a></td>
             <td>{{meeting.Description}}</td>
             <td>{{meeting.Severity}}</td>
+            <td><input type="button" class="btn btn-danger" value="DELETE" ng-click="deleteMeeting(meeting.Id)"/></td>
         </tr>
     </table>
+    <form class="form-inline" role="form" name="addMeetingForm" ng-submit="addMeeting()">
+        <div class="form-group col-sm-4">
+            <input class="form-control" type="text" placeholder="Enter Name" name="newMeeting.Name"
+                ng-model="newMeeting.Name" required maxlength="20" ng-trim="true" ng-change="onNameChange()"/>
+        </div>
+        <div class="form-group col-sm-4">
+            <input class="form-control" type="text" placeholder="Enter Description" name="newMeeting.Description"
+                ng-model="newMeeting.Description" maxlength="50" ng-trim="true"/>
+        </div>
+        <div class="form-group col-sm-2">
+            <select class="form-control" name="newMeeting.SeverityObj"
+                    ng-model="newMeeting.SeverityObj" required ng-options="severity.name for severity in severities"></select>
+        </div>
+        <div class="form-group col-sm-2">
+            <button type="submit" class="btn btn-default">ADD</button>
+        </div>
+    </form>
 </div>

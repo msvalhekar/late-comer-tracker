@@ -6,24 +6,29 @@ namespace LateComerTracker.Backend.Services
 {
     public class MeetingService
     {
-        public IList<Meeting> GetAllMeetings()
+        public IList<Meeting> GetAll()
         {
-            return new MeetingDao().GetAllMeetings();
+            return new MeetingDao().GetAll();
         }
 
-        public Meeting GetMeeting(int id)
+        public Meeting Get(int id)
         {
-            return new MeetingDao().GetMeeting(id);
+            return new MeetingDao().Get(id);
         }
 
-        //public Meeting GetMeeting(string name)
+        //public Meeting Get(string name)
         //{
-        //    return new MeetingDao().GetMeeting(name);
+        //    return new MeetingDao().Get(name);
         //}
 
-        public Meeting AddMeeting(Meeting meeting)
+        public Meeting Add(Meeting meeting)
         {
-            return new MeetingDao().AddMeeting(meeting);
+            return new MeetingDao().Add(meeting);
+        }
+
+        public bool Delete(int id)
+        {
+            return new MeetingDao().Delete(id);
         }
     }
 }

@@ -2,44 +2,49 @@
 (function () {
 
     // ------- All Teams
-    function teamsController($scope, trackerService) {
+    function teamsController($scope, teamService) {
 
-        var getTeamAsync =  function() {
-            trackerService.getTeamsAsync(function (data) {
+        var getTeamsAsync = function() {
+            teamService.getTeamsAsync(function(data) {
                 $scope.teams = data;
             });
-        }
-        getTeamAsync();
+        };
+        getTeamsAsync();
 
         $scope.addTeam = function() {
             var newTeam = $scope.newTeam;
-            trackerService.postTeam(newTeam)
+            teamService.postTeam(newTeam)
                 .then(function (team) {
                     $scope.teams.push(team);
                     $scope.newTeam = null;
             });
         };
 
-        $scope.deleteTeam = function (id) {
-            trackerService.deleteTeam(id).then(function () {
-                getTeamAsync();
+        $scope.deleteTeam = function(id) {
+            teamService.deleteTeam(id).then(function() {
+                getTeamsAsync();
             });
-        }
+        };
 
-        //var promise = trackerService.getTeams();
-
-        //promise.then(function (data) {
-        //    $scope.teams = data;
-        //}, function (error) {
-        //});
+        $scope.onNameChange = function () {
+            var bFound = false;
+            var lowerNameValue = angular.lowercase($scope.newTeam.Name);
+            var teams = $scope.teams;
+            for (var i = 0; i < teams.length; i++) {
+                if (angular.lowercase(teams[i].Name) === lowerNameValue) {
+                    bFound = true;
+                    break;
+                }
+            }
+        };
     }
     
     trackerApp.controller("teamsController", teamsController);
 
     // ------- Single Team Details
-    function teamController($scope, $routeParams, trackerService) {
+    function teamController($scope, $routeParams, teamService) {
 
-        var promise = trackerService.getTeam($routeParams.id);
+        var promise = teamService.getTeam($routeParams.id);
 
         promise.then(function (data) {
             $scope.team = data;
@@ -47,7 +52,5 @@
         });
     }
 
-
-    
     trackerApp.controller("teamController", teamController);
 })();

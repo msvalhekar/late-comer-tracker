@@ -11,22 +11,22 @@ namespace LateComerTracker.Web.ApiControllers
     {
         public IEnumerable<Meeting> Get()
         {
-            return new MeetingService().GetAllMeetings();
+            return new MeetingService().GetAll();
         }
 
         public Meeting Get(int id)
         {
-            return new MeetingService().GetMeeting(id);
+            return new MeetingService().Get(id);
         }
 
         //public Team GetByName(string name)
         //{
-        //    return new MeetingService().GetMeeting(name);
+        //    return new MeetingService().Get(name);
         //}
 
         public Meeting Post(Meeting meeting)
         {
-            meeting = new MeetingService().AddMeeting(meeting);
+            meeting = new MeetingService().Add(meeting);
             if (meeting.Id == 0) return null;
             return meeting;
         }
@@ -35,8 +35,9 @@ namespace LateComerTracker.Web.ApiControllers
         {
         }
 
-        public void Delete(int id)
+        public bool Delete(int id)
         {
+            return new MeetingService().Delete(id);
         }
     }
 }

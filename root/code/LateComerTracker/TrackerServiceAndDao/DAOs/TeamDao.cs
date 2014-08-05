@@ -9,7 +9,7 @@ namespace LateComerTracker.Backend.DAOs
 {
     public class TeamDao : BaseDao
     {
-        public IList<Team> GetAllTeams()
+        public IList<Team> GetAll()
         {
             var table = GetDataTable("select team_id, team_name, team_description from Team");
 
@@ -22,12 +22,12 @@ namespace LateComerTracker.Backend.DAOs
                 }).ToList();
         }
 
-        public Team GetTeam(int id)
+        public Team Get(int id)
         {
             return GetTeamWhere(new KeyValuePair<string, string>("team_id", id.ToString(CultureInfo.InvariantCulture)));
         }
 
-        public Team GetTeam(string name)
+        public Team Get(string name)
         {
             return GetTeamWhere(new KeyValuePair<string, string>("team_name", "'" + name + "'"));
         }
@@ -66,7 +66,7 @@ namespace LateComerTracker.Backend.DAOs
             return team;
         }
 
-        public Team AddTeam(Team team)
+        public Team Add(Team team)
         {
             if (team == null) return null;
 
@@ -75,14 +75,15 @@ namespace LateComerTracker.Backend.DAOs
 
             if (-1 < ExecuteNonQuery(commandText))
             {
-                return GetTeam(team.Name);
+                return Get(team.Name);
             }
             return team;
         }
 
         public bool Delete(int id)
         {
-            var commandText = string.Format("DELETE team where team_id="+id);
+            var commandText = string.Format("DELETE TeamEmployee WHERE team_id = {0};"
+                + "DELETE Team WHERE team_id = {0}", id);
 
             return -1 < ExecuteNonQuery(commandText);
         }
