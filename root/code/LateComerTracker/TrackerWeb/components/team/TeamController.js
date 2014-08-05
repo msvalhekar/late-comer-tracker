@@ -4,12 +4,16 @@
     // ------- All Teams
     function teamsController($scope, trackerService) {
 
-        var promise = trackerService.getTeams();
-
-        promise.then(function (data) {
+        trackerService.getTeamsAsync(function (data) {
             $scope.teams = data;
-        }, function (error) {
         });
+
+        //var promise = trackerService.getTeams();
+
+        //promise.then(function (data) {
+        //    $scope.teams = data;
+        //}, function (error) {
+        //});
     }
     
     trackerApp.controller("teamsController", teamsController);

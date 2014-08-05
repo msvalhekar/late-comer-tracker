@@ -9,11 +9,9 @@
                 });
         };
 
-        this.getTeams = function() {
+        this.getTeamsAsync = function(onSuccessCallback) {
             return $http.get("/api/teams")
-                .then(function (response) {
-                    return response.data;
-                });
+                .success(onSuccessCallback);
         };
 
         this.getTeam = function (teamId) {
