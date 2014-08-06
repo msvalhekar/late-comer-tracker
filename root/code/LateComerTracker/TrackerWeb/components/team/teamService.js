@@ -26,6 +26,13 @@
                 return true;
             });
         };
+        this.editTeam = function (team) {
+            return $http.put("/api/teams/"+team.Id, team)
+                .then(function (response) {
+                    return response.data;
+                });
+        };
+
     };
 
     trackerApp.service('teamService', teamService);

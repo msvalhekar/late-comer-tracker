@@ -14,12 +14,12 @@ namespace LateComerTracker.Backend.DAOs
             var table = GetDataTable("select team_id, team_name, team_description from Team");
 
             return (from DataRow row in table.Rows
-                select new Team
-                {
-                    Id = Convert.ToInt32(row["team_id"]),
-                    Name = row["team_name"].ToString(),
-                    Description = row["team_description"].ToString()
-                }).ToList();
+                    select new Team
+                    {
+                        Id = Convert.ToInt32(row["team_id"]),
+                        Name = row["team_name"].ToString(),
+                        Description = row["team_description"].ToString()
+                    }).ToList();
         }
 
         public Team Get(int id)
@@ -62,7 +62,7 @@ namespace LateComerTracker.Backend.DAOs
                     team.Employees.Add(employeeDao.Get(Convert.ToInt32(dataRow["emp_id"])));
                 }
             }
-            
+
             return team;
         }
 
@@ -86,6 +86,13 @@ namespace LateComerTracker.Backend.DAOs
                 + "DELETE Team WHERE team_id = {0}", id);
 
             return -1 < ExecuteNonQuery(commandText);
+        }
+
+        public void Update(Team team)
+        {
+            var commandText = string.Format("UPDATE Team SET team_name='{0}', team_description='{1}' WHERE team_id = {2}", 
+                team.Name, team.Description, team.Id);
+            ExecuteNonQuery(commandText);
         }
     }
 }

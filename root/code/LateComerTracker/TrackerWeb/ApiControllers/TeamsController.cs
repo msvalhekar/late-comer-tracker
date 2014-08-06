@@ -31,8 +31,9 @@ namespace LateComerTracker.Web.ApiControllers
             return team;
         }
 
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, Team team)
         {
+            new TeamService().Edit(team);
         }
 
         public bool Delete(int id)

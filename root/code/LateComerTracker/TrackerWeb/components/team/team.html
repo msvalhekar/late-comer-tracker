@@ -3,6 +3,7 @@
         <div><strong>Name : </strong>{{team.Name}}</div>
         <div><strong>Description : </strong>{{team.Description}}</div>
         <div><strong>Employees : </strong>
+        
             <table class="table table-bordered table-striped">
                 <th>Name</th>
                 <th>EmailId</th>
@@ -13,6 +14,7 @@
                     <td>{{employee.UnsettledPoints}}</td>
                 </tr>
             </table>
+            <a class="button btn-primary" href="#/teams/edit/{{team.Id}}">Edit Team</a>
         </div>
     </div>
 </div>

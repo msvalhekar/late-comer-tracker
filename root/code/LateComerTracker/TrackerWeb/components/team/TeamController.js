@@ -4,24 +4,29 @@
     // ------- All Teams
     function teamsController($scope, teamService) {
 
-        var getTeamsAsync = function() {
-            teamService.getTeamsAsync(function(data) {
+        var getTeamsAsync = function () {
+            teamService.getTeamsAsync(function (data) {
                 $scope.teams = data;
             });
         };
         getTeamsAsync();
 
-        $scope.addTeam = function() {
+        $scope.addTeam = function () {
             var newTeam = $scope.newTeam;
             teamService.postTeam(newTeam)
                 .then(function (team) {
                     $scope.teams.push(team);
                     $scope.newTeam = null;
-            });
+                });
         };
 
-        $scope.deleteTeam = function(id) {
-            teamService.deleteTeam(id).then(function() {
+        $scope.editTeam = function (id) {
+            alert("EditTeam function " + id);
+
+        };
+
+        $scope.deleteTeam = function (id) {
+            teamService.deleteTeam(id).then(function () {
                 getTeamsAsync();
             });
         };
@@ -38,7 +43,7 @@
             }
         };
     }
-    
+
     trackerApp.controller("teamsController", teamsController);
 
     // ------- Single Team Details
@@ -47,10 +52,21 @@
         var promise = teamService.getTeam($routeParams.id);
 
         promise.then(function (data) {
-            $scope.team = data;
+            $scope.team = $scope.editTeamObj = data;
         }, function (error) {
         });
+
+
+        $scope.editTeam = function (team) {
+
+            var promise = teamService.editTeam(team).
+            then(function (data) {
+                $scope.team = $scope.editTeamObj = data;
+            });
+
+        };
     }
 
     trackerApp.controller("teamController", teamController);
+
 })();

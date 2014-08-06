@@ -30,5 +30,10 @@ namespace LateComerTracker.Backend.Services
         {
             return new TeamDao().Delete(id);
         }
+
+        public void Edit(Team team)
+        {
+            new TeamDao().Update(team);
+        }
     }
 }
