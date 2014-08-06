@@ -60,10 +60,10 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiControllers\EmployeesController.cs" />
     <Compile Include="ApiControllers\MeetingsController.cs" />
     <Compile Include="App_Start\ValidateModelAttribute.cs" />
     <Compile Include="ApiControllers\TeamsController.cs" />
-    <Compile Include="ApiControllers\EmployeesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -73,6 +73,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="app-controller.js" />
     <Content Include="app.js" />
+    <Content Include="components\employee\EmployeeController.js" />
+    <Content Include="components\employee\employees.html" />
+    <Content Include="components\employee\employeeService.js" />
     <Content Include="components\meeting\meetingService.js" />
     <Content Include="components\meeting\MeetingController.js" />
     <Content Include="components\meeting\meetings.html" />
@@ -85,6 +88,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="app-service.js" />
+    <Content Include="app-directives.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Index.html" />

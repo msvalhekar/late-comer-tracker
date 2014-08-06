@@ -1,5 +1,4 @@
-﻿/// <reference path="components/team/team.html" />
-
+﻿
 (function () {
 
     trackerApp = angular.module('lateTrackerApp', ['ngRoute']);
@@ -16,6 +15,10 @@
                 .when('/meetings', {
                     templateUrl: '/components/meeting/meetings.html',
                     controller: 'meetingsController'
+                })
+                .when('/employees', {
+                    templateUrl: '/components/employee/employees.html',
+                    controller: 'employeesController'
                 })
                 .when('/teams', {
                     templateUrl: '/components/team/teams.html',

@@ -4,11 +4,11 @@
     function meetingsController($scope, meetingService) {
 
         $scope.severities = [
-            { name: 'Value1', value: 1 },
-            { name: 'Value2', value: 2 },
-            { name: 'Value3', value: 3 },
-            { name: 'Value4', value: 4 },
-            { name: 'Value5', value: 5 }
+            { name: '1', value: 1 },
+            { name: '2', value: 2 },
+            { name: '3', value: 3 },
+            { name: '4', value: 4 },
+            { name: '5', value: 5 }
         ];
         
         var getMeetingsAsync = function() {

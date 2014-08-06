@@ -59,7 +59,7 @@ namespace LateComerTracker.Backend.DAOs
                 var employeeDao = new EmployeeDao();
                 foreach (DataRow dataRow in empIdsDataTable.Rows)
                 {
-                    team.Employees.Add(employeeDao.GetEmployee(Convert.ToInt32(dataRow["emp_id"])));
+                    team.Employees.Add(employeeDao.Get(Convert.ToInt32(dataRow["emp_id"])));
                 }
             }
             
