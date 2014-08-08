@@ -1,66 +1,65 @@
 ﻿<div class="col-sm-12">
-    <form class="form-horizontal" role="form" name="editTeamForm" ng-submit="editTeam(editTeamObj)">
-        <div id="inputForm" class="col-sm-6">
-            <div class="form-group">
-                <label class="col-sm-3 control-label">Name</label>
-                <div class="col-sm-6">
-                    <input class="form-control" type="text" placeholder="Enter Name" name="newTeam.Name"
-                           ng-model="editTeamObj.Name" required maxlength="20" ng-trim="true" ng-change="onNameChange()" />
+    <form class="form-horizontal formBorder" role="form" name="editTeamForm" ng-submit="updateTeam(editTeamObj)">
+        <div class="formBorder">
+            <div id="inputForm" class="col-sm-6">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Name</label>
+                    <div class="col-sm-5">
+                        <input class="form-control" type="text" placeholder="Enter Name" name="editTeamObj.Name"
+                               ng-model="editTeamObj.Name" required maxlength="20" ng-trim="true" ng-change="onNameChange()" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Description</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" placeholder="Enter Description" name="editTeamObj.Description"
+                               ng-model="editTeamObj.Description" ng-trim="true" maxlength="50" />
+                    </div>
                 </div>
             </div>
-
-            <div class="form-group">
-                <label class="col-sm-3 control-label">Description</label>
+            <div class="col-sm-12">
                 <div class="col-sm-6">
-                    <input class="form-control" type="text" placeholder="Enter Description" name="newTeam.Description"
-                           ng-model="editTeamObj.Description" ng-trim="true" maxlength="50" />
+                    <label class="control-label">Current Employees</label>
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th class="col-sm-4">Name</th>
+                                <th class="col-sm-4">EmailId</th>
+                                <th class="col-sm-2">Action</th>
+                            </tr>
+                        </thead>
+                        <tr ng-repeat="employee in currentEmployeeList">
+                            <td>{{employee.Name}}</td>
+                            <td>{{employee.EmailId}}</td>
+                            <td><input type="button" ng-click="removeFromCurrentEmployeeList(employee)" value="remove" /></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-sm-6">
+                    <label class="control-label">Select From Employees</label>
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th class="col-sm-4">Name</th>
+                                <th class="col-sm-4">EmailId</th>
+                                <th class="col-sm-2">Action</th>
+                            </tr>
+                        </thead>
+                        <tr ng-repeat="employee in availableEmployeeList | orderBy:'IsCurrentEmployee':true">
+                            <td>{{employee.Name}}</td>
+                            <td>{{employee.EmailId}}</td>
+                            <td><input type="button" ng-click="addToCurrentEmployeeList(employee)" ng-hide="employee.IsCurrentEmployee" value="add" /></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
-
-        <div class="col-sm-12">
-            <div class="col-sm-6">
-                <h3>Current Employees</h3>
-                <table class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>EmailId</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tr ng-repeat="employee in currentEmployeeList">
-                        <td>{{employee.Name}}</td>
-                        <td>{{employee.EmailId}}</td>
-                        <td><input type="button" ng-click="removeFromCurrentEmployeeList(employee)" value="REMOVE" /></td>
-                    </tr>
-                </table>
+        <div class="form-group col-sm-offset-4">
+            <div class="col-sm-2">
+                <button type="submit" class="btn btn-danger">SAVE</button>
             </div>
-            <div class="col-sm-6">
-                <h3>Available Employees</h3>
-                <table class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>EmailId</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tr ng-repeat="employee in availableEmployeeList">
-                        <td>{{employee.Name}}</td>
-                        <td>{{employee.EmailId}}</td>
-                        <td><div><input type="button" ng-click="addToCurrentEmployeeList(employee)" ng-hide="employee.IsCurrentEmployee" value="ADD" /></div></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-
-        <div class="form-group col-sm-offset-6">
-            <div class="col-sm-3">
-                <button type="submit" class="btn btn-default">SAVE</button>
-            </div>
-            <div class="col-sm-3">
-                <button type="button" class="btn btn-default">CANCEL</button>
+            <div class="col-sm-2">
+                <button type="button" class="btn btn-default" ng-click="redirectToEdit(editTeamObj)">Cancel</button>
             </div>
         </div>
     </form>

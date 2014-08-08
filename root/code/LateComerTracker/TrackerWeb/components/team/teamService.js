@@ -26,7 +26,8 @@
                 return true;
             });
         };
-        this.editTeam = function (team) {
+
+        this.updateTeam = function (team) {
             return $http.put("/api/teams/"+team.Id, team)
                 .then(function (response) {
                     return response.data;

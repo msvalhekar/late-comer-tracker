@@ -1,7 +1,5 @@
-﻿.darkBG {
-    background: #999;
-}
-
-.darkerBG {
-    background: #666;
-}
+﻿.formBorder
+{
+    /*border:solid 1px gray;*/
+    background-color: lightcyan;
+}  

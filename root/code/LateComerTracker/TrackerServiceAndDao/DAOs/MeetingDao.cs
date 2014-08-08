@@ -68,5 +68,15 @@ namespace LateComerTracker.Backend.DAOs
 
             return -1 < ExecuteNonQuery(commandText);
         }
+
+        public void Update(Meeting meeting)
+        {
+            if (meeting == null) return;
+
+            var commandText = string.Format("UPDATE Meeting SET mtg_name = '{0}', mtg_description = '{1}', mtg_severity = {2} WHERE mtg_id = {3}",
+                meeting.Name, meeting.Description, meeting.Severity, meeting.Id);
+
+            ExecuteNonQuery(commandText);
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
 using LateComerTracker.Api.Filters;
+using LateComerTracker.Backend.DAOs;
 using LateComerTracker.Backend.Models;
 using LateComerTracker.Backend.Services;
 
@@ -31,8 +32,9 @@ namespace LateComerTracker.Web.ApiControllers
             return meeting;
         }
 
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, Meeting meeting)
         {
+            new MeetingDao().Update(meeting);
         }
 
         public bool Delete(int id)
