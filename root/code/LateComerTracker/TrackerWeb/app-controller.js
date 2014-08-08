@@ -1,10 +1,13 @@
 ﻿
 (function () {
 
-    trackerApp = angular.module('lateTrackerApp', ['ngRoute']);
+    trackerApp = angular.module('lateTrackerApp', ['ngRoute', 'xeditable']);
 
+    trackerApp.run(function (editableOptions) {
+        editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+    });
+    
     var appController = function ($scope) {
-        $scope.teamww = "klo";
     };
 
     trackerApp.controller('appController', appController);
@@ -12,6 +15,10 @@
     trackerApp.config(['$routeProvider',
         function ($routeProvider) {
             $routeProvider
+                .when('/settings', {
+                    templateUrl: '/components/configuration/configurations.html',
+                    controller: 'configurationController'
+                })
                 .when('/meetings', {
                     templateUrl: '/components/meeting/meetings.html',
                     controller: 'meetingsController'

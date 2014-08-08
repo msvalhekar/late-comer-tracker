@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using LateComerTracker.Backend.Models;
 
 namespace LateComerTracker.Backend.DAOs
@@ -60,13 +61,10 @@ namespace LateComerTracker.Backend.DAOs
         {
             if (employee == null) return null;
 
-            var commandText = string.Format("INSERT INTO Employee (emp_name, emp_emailId) VALUES ('{0}', '{1}')",
+            var commandText = string.Format("INSERT INTO Employee (emp_name, emp_emailId) OUTPUT inserted.emp_id VALUES ('{0}', '{1}')",
                 employee.Name, employee.EmailId);
 
-            if (-1 < ExecuteNonQuery(commandText))
-            {
-                return Get(employee.Name);
-            }
+            employee.Id = ExecuteScalar(commandText);
             return employee;
         }
 
@@ -77,6 +75,26 @@ namespace LateComerTracker.Backend.DAOs
                                             + "DELETE Employee WHERE emp_id = {0}", id);
 
             return -1 < ExecuteNonQuery(commandText);
+        }
+
+        public void MarkLate(int meetingId, IList<int> employeeIds, string source)
+        {
+            const string insertFormat = "INSERT INTO LateEmployee (le_empId, le_mtgId, le_source) VALUES ({0}, {1}, '{2}');";
+            var commandText = new StringBuilder();
+            foreach (var employeeId in employeeIds)
+            {
+                commandText.AppendLine(string.Format(insertFormat, employeeId, meetingId, source));
+            }
+
+            ExecuteNonQuery(commandText.ToString());
+        }
+
+        public void ServedPenalty(int empId, DateTime servedOn, string how, string source)
+        {
+            var commandText = string.Format("INSERT INTO Penalty (pn_empId, pn_how, pn_source, pn_servedOn) VALUES ({0}, '{1}', '{2}', '{3}')",
+                empId, how, source, servedOn);
+
+            ExecuteNonQuery(commandText);
         }
     }
 }

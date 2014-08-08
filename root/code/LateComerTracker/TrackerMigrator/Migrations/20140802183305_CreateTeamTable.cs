@@ -5,7 +5,7 @@ namespace LateComerTracker.Migrator.Migrations
     [Migration(20140802183305)]
     class _20140802183305_CreateTeamTable : BaseMigration
     {
-        public override void Up()
+        public override bool Up()
         {
             const string commantText = "CREATE TABLE [dbo].[Team]"
                                        + "("
@@ -16,12 +16,12 @@ namespace LateComerTracker.Migrator.Migrations
                                        + ",CONSTRAINT UK_Team_Name UNIQUE (team_name)"
                                        + ")";
 
-            ExecuteNonQuery(commantText);
+            return ExecuteNonQuery(commantText);
         }
 
-        public override void Down()
+        public override bool Down()
         {
-            ExecuteNonQuery("DROP TABLE [dbo].[Team]");
+            return ExecuteNonQuery("DROP TABLE [dbo].[Team]");
         }
     }
 }

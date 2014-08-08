@@ -13,8 +13,10 @@
         $scope.addEmployee = function () {
             employeeService.postEmployee($scope.newEmployee)
                 .then(function (employee) {
-                    $scope.employees.push(employee);
-                    $scope.newEmployee = null;
+                    if (employee) {
+                        $scope.employees.push(employee);
+                        $scope.newEmployee = null;
+                    }
                 });
         };
 

@@ -60,9 +60,9 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiControllers\ConfigurationController.cs" />
     <Compile Include="ApiControllers\EmployeesController.cs" />
     <Compile Include="ApiControllers\MeetingsController.cs" />
-    <Compile Include="ApiControllers\TestController.cs" />
     <Compile Include="App_Start\ValidateModelAttribute.cs" />
     <Compile Include="ApiControllers\TeamsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -74,6 +74,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="app-controller.js" />
     <Content Include="app.js" />
+    <Content Include="components\configuration\ConfigurationController.js" />
+    <Content Include="components\configuration\configurations.html" />
+    <Content Include="components\configuration\configurationsService.js" />
     <Content Include="components\employee\EmployeeController.js" />
     <Content Include="components\employee\employees.html" />
     <Content Include="components\employee\employeeService.js" />
@@ -91,6 +94,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="app-service.js" />
     <Content Include="app-directives.js" />
+    <Content Include="Content\xeditable.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Index.html" />
@@ -104,6 +108,8 @@
     <None Include="scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="scripts\jquery-1.9.1.js" />
     <Content Include="scripts\jquery-1.9.1.min.js" />
+    <Content Include="scripts\xeditable.js" />
+    <Content Include="scripts\xeditable.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

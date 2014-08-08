@@ -5,7 +5,7 @@ namespace LateComerTracker.Migrator.Migrations
     [Migration(20140802194036)]
     class _20140802194036_CreateEmployeeTable : BaseMigration
     {
-        public override void Up()
+        public override bool Up()
         {
             const string commantText = "CREATE TABLE [dbo].[Employee]"
                                        + "("
@@ -16,12 +16,12 @@ namespace LateComerTracker.Migrator.Migrations
                                        + ",CONSTRAINT UK_Employee_emailId UNIQUE (emp_emailId)"
                                        + ")";
 
-            ExecuteNonQuery(commantText);
+            return ExecuteNonQuery(commantText);
         }
 
-        public override void Down()
+        public override bool Down()
         {
-            ExecuteNonQuery("DROP TABLE [dbo].[Employee]");
+            return ExecuteNonQuery("DROP TABLE [dbo].[Employee]");
         }
     }
 }

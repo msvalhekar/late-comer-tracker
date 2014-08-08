@@ -15,8 +15,10 @@
             var newTeam = $scope.newTeam;
             teamService.postTeam(newTeam)
                 .then(function (team) {
-                    $scope.teams.push(team);
-                    $scope.newTeam = null;
+                    if (team) {
+                        $scope.teams.push(team);
+                        $scope.newTeam = null;
+                    }
                 });
         };
 

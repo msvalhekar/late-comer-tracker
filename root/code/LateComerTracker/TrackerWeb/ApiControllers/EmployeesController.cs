@@ -39,5 +39,11 @@ namespace LateComerTracker.Web.ApiControllers
         {
             return new EmployeeService().Delete(id);
         }
+
+
+        public void MarkLate(int meetingId, IList<int> employeeIds, string source)
+        {
+            new EmployeeService().MarkLate(meetingId, employeeIds, source);
+        }
     }
 }

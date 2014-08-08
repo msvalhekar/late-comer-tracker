@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using LateComerTracker.Backend.Models;
 
 namespace LateComerTracker.Backend.DAOs
@@ -70,13 +71,22 @@ namespace LateComerTracker.Backend.DAOs
         {
             if (team == null) return null;
 
-            var commandText = string.Format("INSERT INTO Team (team_name, team_description) VALUES ('{0}', '{1}')",
+            var commandText = string.Format("INSERT INTO Team (team_name, team_description) OUTPUT inserted.team_id VALUES ('{0}', '{1}')",
                 team.Name, team.Description);
 
-            if (-1 < ExecuteNonQuery(commandText))
+            team.Id = ExecuteScalar(commandText);
+
+            if (team.Employees == null) return team;
+
+            // add new employees to this team
+            const string insertFormat = "INSERT INTO TeamEmployee (team_id, emp_id) VALUES ({0}, {1});";
+            var insertCommandText = new StringBuilder();
+            foreach (var employee in team.Employees)
             {
-                return Get(team.Name);
+                insertCommandText.AppendLine(string.Format(insertFormat, team.Id, employee.Id));
             }
+            ExecuteNonQuery(insertCommandText.ToString());
+
             return team;
         }
 
@@ -93,6 +103,18 @@ namespace LateComerTracker.Backend.DAOs
             var commandText = string.Format("UPDATE Team SET team_name='{0}', team_description='{1}' WHERE team_id = {2}", 
                 team.Name, team.Description, team.Id);
             ExecuteNonQuery(commandText);
+
+            // remove all team-employees associations for team
+            ExecuteNonQuery("DELETE TeamEmployee WHERE team_id = " + team.Id);
+
+            // add new employees to this team
+            const string insertFormat = "INSERT INTO TeamEmployee (team_id, emp_id) VALUES ({0}, {1});";
+            var insertCommandText = new StringBuilder();
+            foreach (var employee in team.Employees)
+            {
+                insertCommandText.AppendLine(string.Format(insertFormat, team.Id, employee.Id));
+            }
+            ExecuteNonQuery(insertCommandText.ToString());
         }
     }
 }

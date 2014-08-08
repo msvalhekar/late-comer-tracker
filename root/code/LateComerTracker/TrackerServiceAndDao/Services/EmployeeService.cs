@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.Remoting.Channels;
 using LateComerTracker.Backend.DAOs;
 using LateComerTracker.Backend.Models;
 
@@ -29,6 +31,16 @@ namespace LateComerTracker.Backend.Services
         public bool Delete(int id)
         {
             return new EmployeeDao().Delete(id);
+        }
+
+        public void MarkLate(int meetingId, IList<int> employeeIds, string source)
+        {
+            new EmployeeDao().MarkLate(meetingId, employeeIds, source);
+        }
+
+        public void ServedPenalty(int empId, DateTime servedOn, string how, string source)
+        {
+            new EmployeeDao().ServedPenalty(empId, servedOn, how, source);
         }
     }
 }

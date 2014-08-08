@@ -55,21 +55,16 @@ namespace LateComerTracker.Backend.DAOs
         {
             if (meeting == null) return null;
 
-            var commandText = string.Format("INSERT INTO Meeting (mtg_name, mtg_description, mtg_severity) VALUES ('{0}', '{1}', {2})",
+            var commandText = string.Format("INSERT INTO Meeting (mtg_name, mtg_description, mtg_severity) OUTPUT inserted.mtg_id VALUES ('{0}', '{1}', {2})",
                 meeting.Name, meeting.Description, meeting.Severity);
 
-            if (-1 < ExecuteNonQuery(commandText))
-            {
-                return Get(meeting.Name);
-            }
+            meeting.Id = ExecuteScalar(commandText);
             return meeting;
         }
 
         public bool Delete(int id)
         {
-            var commandText = string.Format("DELETE Meeting WHERE mtg_id = {0}"
-                //+ "DELETE Team WHERE team_id = {0}"
-                , id);
+            var commandText = string.Format("DELETE Meeting WHERE mtg_id = {0}", id);
 
             return -1 < ExecuteNonQuery(commandText);
         }

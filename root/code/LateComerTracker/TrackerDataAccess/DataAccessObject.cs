@@ -35,7 +35,8 @@ namespace LateComerTracker.DataAccess
                 try
                 {
                     connection.Open();
-                    return command.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
+                    return 1;
                 }
                 catch (Exception exc)
                 {

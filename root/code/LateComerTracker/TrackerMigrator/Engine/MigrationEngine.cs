@@ -87,17 +87,30 @@ namespace LateComerTracker.Migrator.Engine
                     if (runUpMigration)
                     {
                         Console.Write(pair.Key + " UP ");
-                        migration.Up();
-                        DataAccessObject.ExecuteScalar("INSERT INTO SchemaInfo ([Version]) VALUES (" + pair.Key + ")");
+                        if (migration.Up())
+                        {
+                            DataAccessObject.ExecuteScalar("INSERT INTO SchemaInfo ([Version]) VALUES (" + pair.Key + ")");
+                            Console.WriteLine("SUCCESS");
+                        }
+                        else
+                        {
+                            Console.WriteLine("FAILED");
+                        }
                     }
                     else
                     {
                         Console.Write(pair.Key + " DOWN ");
-                        migration.Down();
-                        DataAccessObject.ExecuteScalar("DELETE SchemaInfo WHERE [Version] = " + pair.Key);
+                        if (migration.Down())
+                        {
+                            DataAccessObject.ExecuteScalar("DELETE SchemaInfo WHERE [Version] = " + pair.Key);
+                            Console.WriteLine("SUCCESS");
+                        }
+                        else
+                        {
+                            Console.WriteLine("FAILED");
+                        }
                     }
                 }
-                Console.WriteLine("SUCCESS");
                 return true;
             }
             catch (Exception e)

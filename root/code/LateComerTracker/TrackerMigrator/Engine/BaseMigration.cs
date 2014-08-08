@@ -5,8 +5,8 @@ namespace LateComerTracker.Migrator.Engine
 {
     abstract class BaseMigration
     {
-        public abstract void Up();
-        public abstract void Down();
+        public abstract bool Up();
+        public abstract bool Down();
 
         private readonly DataAccessObject _dataAccess;
 
@@ -16,9 +16,9 @@ namespace LateComerTracker.Migrator.Engine
             _dataAccess = new DataAccessObject(connString);
         }
 
-        protected void ExecuteNonQuery(string commandText)
+        protected bool ExecuteNonQuery(string commandText)
         {
-            _dataAccess.ExecuteNonQuery(commandText);
+            return -1 < _dataAccess.ExecuteNonQuery(commandText);
         }
     }
 }

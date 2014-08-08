@@ -42,8 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\20140804202034_CreateEmployeePointTable.cs" />
+    <Compile Include="Migrations\20140804202034_CreateEmployeeFineTable.cs" />
     <Compile Include="Migrations\20140804211523_CreateMeetingTable.cs" />
+    <Compile Include="Migrations\20140806202139_CreateLateEmployeeTable.cs" />
+    <Compile Include="Migrations\20140806224412_CreateInsertTriggerOnLateEmployeeTable.cs" />
+    <Compile Include="Migrations\20140806225554_CreatePenaltyTable.cs" />
+    <Compile Include="Migrations\20140806231425_CreateConfigTable.cs" />
+    <Compile Include="Migrations\20140806234912_CreateInsertTriggerOnPenaltyTable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Engine\BaseMigration.cs" />

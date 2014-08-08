@@ -1,22 +1,28 @@
 ﻿
 (function () {
 
-    function meetingsController($scope, meetingService) {
+    function meetingsController($scope, $filter, meetingService) {
 
         $scope.severities = [
-            { name: '1', value: 1 },
-            { name: '2', value: 2 },
-            { name: '3', value: 3 },
-            { name: '4', value: 4 },
-            { name: '5', value: 5 }
+            { value: 1, text: '1 pts', },
+            { value: 2, text: '2 pts', },
+            { value: 3, text: '3 pts', },
+            { value: 4, text: '4 pts', },
+            { value: 5, text: '5 pts', }
         ];
-        
+
+        // todo: http://vitalets.github.io/angular-xeditable/        
         var getMeetingsAsync = function() {
             meetingService.getMeetingsAsync(function(data) {
                 $scope.meetings = data;
             });
         };
         getMeetingsAsync();
+        
+        $scope.showSeverity = function (selectedMeeting) {
+            var selected = $filter('filter')($scope.severities, { value: selectedMeeting.Severity });
+            return (selectedMeeting.Severity && selected.length) ? selected[0].text : 'Not set';
+        };
         
         $scope.addMeeting = function () {
             var newMeeting = {
@@ -27,8 +33,10 @@
             
             meetingService.postMeeting(newMeeting)
                 .then(function (meeting) {
-                    $scope.meetings.push(meeting);
-                    $scope.newMeeting = null;
+                    if (meeting) {
+                        $scope.meetings.push(meeting);
+                        $scope.newMeeting = null;
+                    }
                 });
         };
 
