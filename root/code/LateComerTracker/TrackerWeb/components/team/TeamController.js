@@ -49,23 +49,59 @@
     trackerApp.controller("teamsController", teamsController);
 
     // ------- Single Team Details
-    function teamController($scope, $routeParams, teamService) {
+    function teamController($scope, $routeParams, teamService, employeeService,$filter) {
+        $scope.currentEmployeeList = [];
+        $scope.availableEmployeeList = [];
 
-        var promise = teamService.getTeam($routeParams.id);
-
-        promise.then(function (data) {
-            $scope.team = $scope.editTeamObj = data;
-        }, function (error) {
-        });
+        teamService.getTeam($routeParams.id)
+            .then(function(data) {
+                $scope.team = $scope.editTeamObj = data;
+                $scope.currentEmployeeList = $scope.team.Employees;
+            });
 
 
         $scope.editTeam = function (team) {
+            teamService.editTeam(team).
+                then(function (data) {
+                    $scope.team = $scope.editTeamObj = data;
+                });
+        };
 
-            var promise = teamService.editTeam(team).
-            then(function (data) {
-                $scope.team = $scope.editTeamObj = data;
-            });
+        employeeService.getEmployeesAsync(function (data) {
+            $scope.availableEmployeeList = data;
+            updateAvailableEmployeeListWithCurrentEmp();
+        });
 
+        var updateAvailableEmployeeListWithCurrentEmp = function () {
+            for (var j = $scope.currentEmployeeList.length - 1; j >= 0; j--) {
+                for (var i = $scope.availableEmployeeList.length - 1; i >= 0; i--) {
+                    if ($scope.availableEmployeeList[i].Id == $scope.currentEmployeeList[j].Id) {
+                        $scope.availableEmployeeList[i].IsCurrentEmployee = true;
+                    }
+                }
+            }
+        };
+
+        $scope.removeFromCurrentEmployeeList = function(employee) {
+
+            for (var i = $scope.currentEmployeeList.length - 1; i >= 0; i--) {
+                if ($scope.currentEmployeeList[i].Id == employee.Id) {
+                    $scope.currentEmployeeList.splice(i, 1);
+                    for (var j = $scope.availableEmployeeList.length - 1; j >= 0; j--) {
+                        if ($scope.availableEmployeeList[j].Id == employee.Id) {
+                            $scope.availableEmployeeList[j].IsCurrentEmployee = false;
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+
+
+        };
+        $scope.addToCurrentEmployeeList = function (employee) {
+            employee.IsCurrentEmployee = true;
+            $scope.currentEmployeeList.push(employee);
         };
     }
 
