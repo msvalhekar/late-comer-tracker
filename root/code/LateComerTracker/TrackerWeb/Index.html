@@ -1,51 +1,60 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" ng-app="lateTrackerApp">
-    <head>
-        <title>Late Comer Tracker</title>
-        <link href="main.css" rel="stylesheet" />
-        <link href="Content/bootstrap.css" rel="stylesheet" />
-        <link href="Content/bootstrap-theme.css" rel="stylesheet" />
-        <link href="Content/xeditable.css" rel="stylesheet" />
-    </head>
-    <body>
-        <header class="navbar">
-            <div class="container">
-                <nav class="navbar navbar-default" role="navigation">
-                    <div class="container-fluid">
-                        <!-- Collect the nav links, forms, and other content for toggling -->
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <ul class="nav navbar-nav">
-                                <!--<li><a href="#">Attendance</a></li>-->
-                                <li><a href="#/teams">Teams</a></li>
-                                <li><a href="#/employees">Employees</a></li>
-                                <li><a href="#/meetings">Meetings</a></li>
-                                <!--<li><a href="#">Penalty</a></li>-->
-                                <li><a href="#/settings">Settings</a></li>
-                            </ul>
-                        </div><!-- /.navbar-collapse -->
-                    </div><!-- /.container-fluid -->
-                </nav>
-                <!--<div id="partialContainer">-->
-                <div ng-controller="appController">
-                    <div ng-view></div>
-                </div>
+<head>
+    <title>Late Comer Tracker</title>
+    <link href="main.css" rel="stylesheet" />
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="Content/xeditable.css" rel="stylesheet" />
+</head>
+<body ng-controller="appController">
+    <header class="navbar">
+        <div class="container">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <!--<li><a href="#">Attendance</a></li>-->
+                            <li><a href="#/teams">Teams</a></li>
+                            <li><a href="#/employees">Employees</a></li>
+                            <li><a href="#/meetings">Meetings</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Attendance<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li ng-repeat="team in teams"><a href="#/attendance/{{team.Id}}">{{team.Name}}</a></li>
+                                    <!--<li><a href="#">Action</a></li>-->
+                                </ul>
+                            </li>
+                            <!--<li><a href="#">Penalty</a></li>-->
+                            <li><a href="#/settings">Settings</a></li>
+
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+            <!--<div id="partialContainer">-->
+            <div>
+                <div ng-view></div>
             </div>
-        </header>
-        <script src="scripts/angular.js"></script>
-        <script src="scripts/angular-route.js"></script>
-        <script src="scripts/jquery-1.9.1.js"></script>
-        <script src="Scripts/bootstrap.js"></script>
-        <script src="scripts/xeditable.js"></script>
-        <script src="app-controller.js"></script>
-        <script src="app-service.js"></script>
-        <script src="app-directives.js"></script>
-        <script src="components/team/teamService.js"></script>
-        <script src="components/team/TeamController.js"></script>
-        <script src="components/meeting/meetingService.js"></script>
-        <script src="components/meeting/MeetingController.js"></script>
-        <script src="components/employee/employeeService.js"></script>
-        <script src="components/employee/EmployeeController.js"></script>
-        <script src="components/configuration/configurationsService.js"></script>
-        <script src="components/configuration/ConfigurationController.js"></script>
-    </body>
+        </div>
+    </header>
+    <script src="scripts/angular.js"></script>
+    <script src="scripts/angular-route.js"></script>
+    <script src="scripts/jquery-1.9.1.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="scripts/xeditable.js"></script>
+    <script src="app-controller.js"></script>
+    <script src="app-service.js"></script>
+    <script src="app-directives.js"></script>
+    <script src="components/team/teamService.js"></script>
+    <script src="components/team/TeamController.js"></script>
+    <script src="components/attendance/attendanceController.js"></script>
+    <script src="components/meeting/meetingService.js"></script>
+    <script src="components/meeting/MeetingController.js"></script>
+    <script src="components/employee/employeeService.js"></script>
+    <script src="components/employee/EmployeeController.js"></script>
+    <script src="components/configuration/configurationsService.js"></script>
+    <script src="components/configuration/ConfigurationController.js"></script>
+</body>
 </html>

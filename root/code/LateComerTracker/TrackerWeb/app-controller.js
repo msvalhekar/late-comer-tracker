@@ -7,7 +7,13 @@
         editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
     });
     
-    var appController = function ($scope) {
+    var appController = function ($scope, teamService) {
+
+        //$scope.getTeamsForAttendance = function () {
+            teamService.getTeamsAsync(function (data) {
+                $scope.teams = data;
+            });
+       // };
     };
 
     trackerApp.controller('appController', appController);
@@ -38,7 +44,11 @@
                .when('/teams/edit/:id', {
                    templateUrl: '/components/team/editTeam.html',
                    controller: 'teamController'
-               });
+               })
+            .when('/attendance/:id', {
+                templateUrl: '/components/attendance/attendance.html',
+                controller: 'attendanceController'
+            });
         }
     ]);
 
