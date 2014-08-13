@@ -28,18 +28,6 @@
                 getTeamsAsync();
             });
         };
-
-        $scope.onNameChange = function() {
-            var bFound = false;
-            var lowerNameValue = angular.lowercase($scope.newTeam.Name);
-            var teams = $scope.teams;
-            for (var i = 0; i < teams.length; i++) {
-                if (angular.lowercase(teams[i].Name) === lowerNameValue) {
-                    bFound = true;
-                    break;
-                }
-            }
-        };
     }
 
     trackerApp.controller("teamsController", teamsController);

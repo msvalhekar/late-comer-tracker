@@ -25,18 +25,6 @@
                 getEmployeesAsync();
             });
         };
-
-        $scope.onNameChange = function () {
-            var bFound = false;
-            var lowerNameValue = angular.lowercase($scope.newEmployee.Name);
-            var employees = $scope.employees;
-            for (var i = 0; i < employees.length; i++) {
-                if (angular.lowercase(employees[i].Name) === lowerNameValue) {
-                    bFound = true;
-                    break;
-                }
-            }
-        };
     }
     
     trackerApp.controller("employeesController", employeesController);

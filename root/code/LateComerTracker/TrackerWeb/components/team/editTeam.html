@@ -5,8 +5,10 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Name</label>
                     <div class="col-sm-5">
-                        <input class="form-control" type="text" placeholder="Enter Name" name="editTeamObj.Name"
-                               ng-model="editTeamObj.Name" required maxlength="20" ng-trim="true" ng-change="onNameChange()" />
+                        <input class="form-control" type="text" placeholder="Enter Name" name="editTeamObjName"
+                               ng-model="editTeamObj.Name" required maxlength="20" ng-trim="true" 
+                               check-unique-name="teams | filter: editTeamObj.Name"/>
+                        <span ng-show="editTeamForm.editTeamObjName.$error.checkUniqueName">This Name is already used</span>
                     </div>
                 </div>
                 <div class="form-group">

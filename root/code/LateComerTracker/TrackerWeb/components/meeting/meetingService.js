@@ -14,6 +14,13 @@
                 });
         };
 
+        this.updateMeeting = function (meeting) {
+            return $http.put("/api/meetings/" + meeting.Id, meeting);
+                //.then(function (response) {
+                //    return response.data;
+                //});
+        };
+
         this.deleteMeeting = function (meetingId) {
             return $http.delete("/api/meetings/" + meetingId).then(function () {
                 return true;

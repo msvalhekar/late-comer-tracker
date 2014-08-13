@@ -10,27 +10,29 @@
             </tr>
         </thead>
         <tr ng-repeat="meeting in meetings">
-            <td>{{meeting.Name}}</td>
+            <td><a href="#meetings/{{meeting.Id}}" editable-text="meeting.Name" onaftersave="updateMeetingName($data, meeting)">{{meeting.Name}}</a></td>
             <td>{{meeting.Description}}</td>
-            <td>{{meeting.Severity}}</td>
+            <td><a href="#" editable-select="meeting.Severity" e-ng-options="x.value as x.text for x in severities">{{showSeverity(meeting)}}</a></td>
             <td><input type="button" class="btn btn-danger" value="DELETE" ng-click="deleteMeeting(meeting.Id)"/></td>
         </tr>
     </table>
     <form class="form-inline" role="form" name="addMeetingForm" ng-submit="addMeeting()">
         <div class="form-group col-sm-4">
-            <input class="form-control" type="text" placeholder="Enter Name" name="newMeeting.Name"
-                   ng-model="newMeeting.Name" required maxlength="20" ng-trim="true" ng-change="onNameChange()"/>
+            <input class="form-control" type="text" placeholder="Enter Name" name="newMeetingName"
+                   ng-model="newMeeting.Name" ng-trim="true" check-unique-name="meetings" required maxlength="20" />
+            <span ng-show="addMeetingForm.newMeetingName.$error.checkUniqueName">This Name is already used</span>
         </div>
         <div class="form-group col-sm-4">
-            <input class="form-control" type="text" placeholder="Enter Description" name="newMeeting.Description"
+            <input class="form-control" type="text" placeholder="Enter Description" name="newMeetingDescription"
                    ng-model="newMeeting.Description" maxlength="50" ng-trim="true"/>
         </div>
         <div class="form-group col-sm-2">
-            <select class="form-control" name="newMeeting.SeverityObj"
-                    ng-model="newMeeting.SeverityObj" required ng-options="severity.name for severity in severities"></select>
+            <select class="form-control" name="newMeetingSeverityObj"
+                    ng-model="newMeeting.SeverityObj" ng-options="s.text for s in severities" 
+                    required></select>
         </div>
         <div class="form-group col-sm-2">
-            <button type="submit" class="btn btn-default">ADD</button>
+            <button type="submit" class="btn btn-default" ng-hide="addMeetingForm.newMeetingName.$error.checkUniqueName">ADD</button>
         </div>
     </form>
 </div>

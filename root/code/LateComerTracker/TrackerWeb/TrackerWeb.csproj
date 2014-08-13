@@ -74,6 +74,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="app-controller.js" />
     <Content Include="app.js" />
+    <Content Include="components\attendance\attendance.html" />
+    <Content Include="components\attendance\attendanceController.js" />
     <Content Include="components\configuration\ConfigurationController.js" />
     <Content Include="components\configuration\configurations.html" />
     <Content Include="components\configuration\configurationsService.js" />
@@ -110,6 +112,7 @@
     <Content Include="scripts\jquery-1.9.1.min.js" />
     <Content Include="scripts\xeditable.js" />
     <Content Include="scripts\xeditable.min.js" />
+    <Content Include="Tasks.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

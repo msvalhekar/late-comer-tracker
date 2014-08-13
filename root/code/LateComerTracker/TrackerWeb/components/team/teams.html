@@ -17,15 +17,16 @@
     </table>
     <form class="form-inline" role="form" name="addTeamForm" ng-submit="addTeam()">
         <div class="form-group col-sm-4">
-            <input class="form-control" type="text" placeholder="Enter Name" name="newTeam.Name" 
-                ng-model="newTeam.Name" required maxlength="20" ng-trim="true" ng-change="onNameChange()"/>
+            <input class="form-control" type="text" placeholder="Enter Name" name="newTeamName" 
+                   ng-model="newTeam.Name" required maxlength="20" ng-trim="true" check-unique-name="teams"/>
+            <span ng-show="addTeamForm.newTeamName.$error.checkUniqueName">This Name is already used</span>
         </div>
         <div class="form-group col-sm-6">
-            <input class="form-control" type="text" placeholder="Enter Description" name="newTeam.Description" 
-                ng-model="newTeam.Description" ng-trim="true" maxlength="50"/>
+            <input class="form-control" type="text" placeholder="Enter Description" name="newTeamDescription" 
+                   ng-model="newTeam.Description" ng-trim="true" maxlength="50"/>
         </div>
         <div class="form-group col-sm-2">
-            <button type="submit" class="btn btn-default">ADD</button>
+            <button type="submit" class="btn btn-default" ng-hide="addTeamForm.newTeamName.$error.checkUniqueName">ADD</button>
         </div>
     </form>
 </div>
