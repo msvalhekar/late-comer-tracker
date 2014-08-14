@@ -27,13 +27,20 @@
             });
         };
 
-        this.updateTeam = function (team) {
-            return $http.put("/api/teams/"+team.Id, team)
-                .then(function (response) {
+        this.updateTeam = function(team) {
+            return $http.put("/api/teams/" + team.Id, team)
+                .then(function(response) {
                     return response.data;
                 });
         };
 
+        this.markAttendance = function(teamId, meetingId, employeeIds) {
+            var attendance = { teamId: teamId, meetingId: meetingId, employeeIds: employeeIds, source: "xyz" };
+            return $http.post("api/attendance/", attendance)
+                .then(function(response) {
+                    return response.data;
+                });
+        };
     };
 
     trackerApp.service('teamService', teamService);

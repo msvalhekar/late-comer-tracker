@@ -23,9 +23,9 @@ namespace LateComerTracker.Backend.DAOs
                 }).ToList();
         }
 
-        public Employee Get(int id)
+        public Employee Get(int id, int teamId = 0)
         {
-            return GetWhere(new KeyValuePair<string, string>("emp_id", id.ToString(CultureInfo.InvariantCulture)));
+            return GetWhere(new KeyValuePair<string, string>("emp_id", id.ToString(CultureInfo.InvariantCulture)), teamId);
         }
 
         public Employee Get(string name)
@@ -33,7 +33,7 @@ namespace LateComerTracker.Backend.DAOs
             return GetWhere(new KeyValuePair<string, string>("emp_name", "'" + name + "'"));
         }
 
-        private Employee GetWhere(KeyValuePair<string, string> wherePair)
+        private Employee GetWhere(KeyValuePair<string, string> wherePair, int teamId = 0)
         {
             var commandText = "select e.emp_id, e.emp_name, e.emp_emailId from Employee e"
                               + " where e." + wherePair.Key + " = " + wherePair.Value;
@@ -50,10 +50,11 @@ namespace LateComerTracker.Backend.DAOs
                 UnsettledPoints = 0
             };
 
-            var empFineCommandText = "select unsettled_points from EmployeeFine"
-                             + " where emp_id = " + employee.Id;
-
-            employee.UnsettledPoints = ExecuteScalar(empFineCommandText);
+            if (teamId != 0)
+            {
+                var fineCommandText = string.Format("select unsettled_points from EmployeeFine where team_id = {0} and emp_id = {1}", teamId, employee.Id);
+                employee.UnsettledPoints = ExecuteScalar(fineCommandText);
+            }
             return employee;
         }
 
@@ -75,18 +76,6 @@ namespace LateComerTracker.Backend.DAOs
                                             + "DELETE Employee WHERE emp_id = {0}", id);
 
             return -1 < ExecuteNonQuery(commandText);
-        }
-
-        public void MarkLate(int meetingId, IList<int> employeeIds, string source)
-        {
-            const string insertFormat = "INSERT INTO LateEmployee (le_empId, le_mtgId, le_source) VALUES ({0}, {1}, '{2}');";
-            var commandText = new StringBuilder();
-            foreach (var employeeId in employeeIds)
-            {
-                commandText.AppendLine(string.Format(insertFormat, employeeId, meetingId, source));
-            }
-
-            ExecuteNonQuery(commandText.ToString());
         }
 
         public void ServedPenalty(int empId, DateTime servedOn, string how, string source)

@@ -20,5 +20,17 @@ namespace LateComerTracker.Migrator.Engine
         {
             return -1 < _dataAccess.ExecuteNonQuery(commandText);
         }
+
+        public bool DropTable(string tableName)
+        {
+            var commandText = string.Format("IF object_id('{0}') IS NOT NULL DROP TABLE {0}", tableName);
+            return ExecuteNonQuery(commandText);
+        }
+
+        public bool DropTrigger(string triggerName)
+        {
+            var commandText = string.Format("IF EXISTS(SELECT * FROM sys.triggers WHERE name = '{0}') DROP TRIGGER {0}", triggerName);
+            return ExecuteNonQuery(commandText);
+        }
     }
 }

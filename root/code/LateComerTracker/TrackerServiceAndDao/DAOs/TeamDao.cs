@@ -60,7 +60,7 @@ namespace LateComerTracker.Backend.DAOs
                 var employeeDao = new EmployeeDao();
                 foreach (DataRow dataRow in empIdsDataTable.Rows)
                 {
-                    team.Employees.Add(employeeDao.Get(Convert.ToInt32(dataRow["emp_id"])));
+                    team.Employees.Add(employeeDao.Get(Convert.ToInt32(dataRow["emp_id"]), team.Id));
                 }
             }
 
@@ -116,5 +116,18 @@ namespace LateComerTracker.Backend.DAOs
             }
             ExecuteNonQuery(insertCommandText.ToString());
         }
+
+        public void MarkLate(int teamId, int meetingId, IList<int> employeeIds, string source)
+        {
+            const string insertFormat = "INSERT INTO LateEmployee (le_teamId, le_empId, le_mtgId, le_source) VALUES ({0}, {1}, {2}, '{3}');";
+            var commandText = new StringBuilder();
+            foreach (var employeeId in employeeIds)
+            {
+                commandText.AppendLine(string.Format(insertFormat, teamId, employeeId, meetingId, source));
+            }
+
+            ExecuteNonQuery(commandText.ToString());
+        }
+
     }
 }

@@ -10,10 +10,12 @@ namespace LateComerTracker.Migrator.Migrations
             const string commantText = "CREATE TABLE [dbo].[LateEmployee]"
                                        + "("
                                        + " [le_id] [int] NOT NULL IDENTITY(1,1)"
+                                       + ",[le_teamId] [int] NOT NULL"
                                        + ",[le_empId] [int] NOT NULL"
                                        + ",[le_mtgId] [int] NOT NULL"
                                        + ",[le_source] [varchar](50) NOT NULL"
                                        + ",[le_lateOn] [datetime] NOT NULL DEFAULT(GETDATE())"
+                                       + ",CONSTRAINT FK_LateEmployee_TeamId_Team_Id FOREIGN KEY (le_teamId) REFERENCES Team(team_id)"
                                        + ",CONSTRAINT FK_LateEmployee_EmpId_Employee_Id FOREIGN KEY (le_empId) REFERENCES Employee(emp_id)"
                                        + ",CONSTRAINT FK_LateEmployee_MtgId_Meeting_Id FOREIGN KEY (le_mtgId) REFERENCES Meeting(mtg_id)"
                                        + ")";
@@ -23,7 +25,7 @@ namespace LateComerTracker.Migrator.Migrations
 
         public override bool Down()
         {
-            return ExecuteNonQuery("DROP TABLE [dbo].[LateEmployee]");
+            return DropTable("[dbo].[LateEmployee]");
         }
     }
 }

@@ -21,7 +21,7 @@ namespace LateComerTracker.Migrator.Migrations
 
         public override bool Down()
         {
-            return ExecuteNonQuery("DROP TABLE [dbo].[Team]");
+            return DropTable("[dbo].[Team]");
         }
     }
 }

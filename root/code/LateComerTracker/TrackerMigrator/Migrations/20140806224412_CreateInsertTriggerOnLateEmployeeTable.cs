@@ -13,13 +13,13 @@ namespace LateComerTracker.Migrator.Migrations
             commantText.AppendLine("AFTER INSERT");
             commantText.AppendLine("AS");
             commantText.AppendLine("BEGIN");
-            commantText.AppendLine(" DECLARE @severity int, @empId int");
-            commantText.AppendLine(" SELECT @severity = mtg_severity, @empId = i.le_empId FROM Meeting");
+            commantText.AppendLine(" DECLARE @severity int, @teamId int, @empId int");
+            commantText.AppendLine(" SELECT @severity = mtg_severity, @teamId = i.le_teamId, @empId = i.le_empId FROM Meeting");
             commantText.AppendLine("     JOIN inserted i ON i.le_mtgId = mtg_id");
-            commantText.AppendLine("	IF EXISTS(SELECT * FROM EmployeeFine ef WHERE ef.emp_id = @empId)");
-            commantText.AppendLine("		UPDATE EmployeeFine SET unsettled_points += @severity WHERE emp_id = @empId");
+            commantText.AppendLine("	IF EXISTS(SELECT * FROM EmployeeFine ef WHERE  ef.team_id = @teamId AND ef.emp_id = @empId)");
+            commantText.AppendLine("		UPDATE EmployeeFine SET unsettled_points += @severity WHERE team_id = @teamId AND emp_id = @empId");
             commantText.AppendLine("	ELSE");
-            commantText.AppendLine("		INSERT INTO EmployeeFine (emp_id, unsettled_points) VALUES (@empId, @severity)");
+            commantText.AppendLine("		INSERT INTO EmployeeFine (team_id, emp_id, unsettled_points) VALUES (@teamId, @empId, @severity)");
             commantText.AppendLine("END");
 
             return ExecuteNonQuery(commantText.ToString());
@@ -27,7 +27,7 @@ namespace LateComerTracker.Migrator.Migrations
 
         public override bool Down()
         {
-            return ExecuteNonQuery("DROP TRIGGER LateEmployeeOnInsert");
+            return DropTrigger("LateEmployeeOnInsert");
         }
     }
 }

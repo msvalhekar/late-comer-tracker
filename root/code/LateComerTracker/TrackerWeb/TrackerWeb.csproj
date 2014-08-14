@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiControllers\ConfigurationController.cs" />
+    <Compile Include="ApiControllers\AttendanceController.cs" />
     <Compile Include="ApiControllers\EmployeesController.cs" />
     <Compile Include="ApiControllers\MeetingsController.cs" />
     <Compile Include="App_Start\ValidateModelAttribute.cs" />

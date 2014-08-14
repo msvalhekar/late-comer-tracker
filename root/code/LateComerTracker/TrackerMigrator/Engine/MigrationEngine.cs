@@ -47,10 +47,7 @@ namespace LateComerTracker.Migrator.Engine
             foreach (var migrationPair in migrationsToApply)
             {
                 if (!CreateInstanceAndRunMigration(migrationPair, true))
-                {
-                    Console.WriteLine("{0} failed.", migrationPair.Key);
                     break;
-                }
             }
         }
 
@@ -71,8 +68,7 @@ namespace LateComerTracker.Migrator.Engine
 
             foreach (var migrationPair in assemblyMigrationsToRemove)
             {
-                if (!CreateInstanceAndRunMigration(migrationPair, false))
-                    Console.WriteLine("{0} failed.", migrationPair.Key);
+                CreateInstanceAndRunMigration(migrationPair, false);
             }
         }
 

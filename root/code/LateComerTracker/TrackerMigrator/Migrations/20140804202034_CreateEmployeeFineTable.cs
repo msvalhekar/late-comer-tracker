@@ -9,8 +9,10 @@ namespace LateComerTracker.Migrator.Migrations
         {
             const string commantText = "CREATE TABLE [dbo].[EmployeeFine]"
                                        + "("
-                                       + " [emp_id] [int] NOT NULL"
+                                       + " [team_id] [int] NOT NULL"
+                                       + ",[emp_id] [int] NOT NULL"
                                        + ",[unsettled_points] [int] NOT NULL"
+                                       + ",CONSTRAINT FK_EmployeeFine_TeamId_Team_Id FOREIGN KEY (team_id) REFERENCES Team(team_id)"
                                        + ",CONSTRAINT FK_EmployeeFine_EmpId_Employee_Id FOREIGN KEY (emp_id) REFERENCES Employee(emp_id)"
                                        + ")";
 
@@ -19,7 +21,7 @@ namespace LateComerTracker.Migrator.Migrations
 
         public override bool Down()
         {
-            return ExecuteNonQuery("DROP TABLE [dbo].[EmployeeFine]");
+            return DropTable("[dbo].[EmployeeFine]");
         }
     }
 }

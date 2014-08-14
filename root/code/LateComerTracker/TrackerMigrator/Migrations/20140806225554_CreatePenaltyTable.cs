@@ -10,10 +10,12 @@ namespace LateComerTracker.Migrator.Migrations
             const string commantText = "CREATE TABLE [dbo].[Penalty]"
                                        + "("
                                        + " [pn_id] [int] NOT NULL IDENTITY(1,1)"
+                                       + ",[pn_teamId] [int] NOT NULL"
                                        + ",[pn_empId] [int] NOT NULL"
                                        + ",[pn_how] [varchar](100) NOT NULL"
                                        + ",[pn_source] [varchar](50) NOT NULL"
                                        + ",[pn_servedOn] [datetime] NOT NULL"
+                                       + ",CONSTRAINT FK_Penalty_TeamId_Team_Id FOREIGN KEY (pn_teamId) REFERENCES Team(team_id)"
                                        + ",CONSTRAINT FK_Penalty_EmpId_Employee_Id FOREIGN KEY (pn_empId) REFERENCES Employee(emp_id)"
                                        + ")";
 
@@ -22,7 +24,7 @@ namespace LateComerTracker.Migrator.Migrations
 
         public override bool Down()
         {
-            return ExecuteNonQuery("DROP TABLE [dbo].[Penalty]");
+            return DropTable("[dbo].[Penalty]");
         }
     }
 }
