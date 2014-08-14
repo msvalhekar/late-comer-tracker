@@ -17,6 +17,23 @@ namespace LateComerTracker.Backend.Models
         
         public int UnsettledPoints { get; set; }
         
-        public int SettledPenalties { get; set; }
+        public string DuePenalties {
+            get
+            {
+                if (UnsettledPoints == 0) return "0 penalties";
+
+                var dueRoundPenalties = (uint)UnsettledPoints/Configurations.PointsPerPenalty;
+                var duePoints = UnsettledPoints % Configurations.PointsPerPenalty;
+
+                if (dueRoundPenalties == 0) return string.Format("{0} points", duePoints);
+                if (dueRoundPenalties == 1)
+                {
+                    if (duePoints == 0) return string.Format("1 penalty");
+                    return string.Format("1 penalty {0} points", duePoints);
+                }
+                if (duePoints == 0) return string.Format("{0} penalties", dueRoundPenalties);
+                return string.Format("{0} penalties {1} points", dueRoundPenalties, duePoints);
+            } 
+        }
     }
 }

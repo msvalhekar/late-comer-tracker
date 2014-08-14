@@ -1,19 +1,23 @@
-﻿<div class="col-sm-4">
-    <div>
+﻿<div class="col-sm-12">
+    <div class="col-sm-6">
         <div><strong>Name : </strong>{{team.Name}}</div>
         <div><strong>Description : </strong>{{team.Description}}</div>
-        <div><strong>Employees : </strong>
-        
+        <div>
+            <strong>Employees : </strong>
             <table class="table table-bordered table-striped">
-                <th>Name</th>
-                <th>EmailId</th>
-                <th>Unsettled Points</th>
-                <th>Served Penalty</th>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>EmailId</th>
+                        <th>Unsettled Penalties</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
                 <tr ng-repeat="employee in team.Employees">
                     <td>{{employee.Name}}</td>
                     <td>{{employee.EmailId}}</td>
-                    <td>{{employee.UnsettledPoints}}</td>
-                    <td><a ng-click="someMethod()" data-toggle="modal" data-target="#servePenalityDialog">{{employee.SettledPenalties}}</a></td>
+                    <td>{{employee.DuePenalties}}</td>
+                    <td><a ng-click="someMethod()" data-toggle="modal" data-target="#servePenalityDialog">Settle Penalty</a></td>
                 </tr>
             </table>
             <a class="button btn-primary" href="#/teams/edit/{{team.Id}}">Edit Team</a>
