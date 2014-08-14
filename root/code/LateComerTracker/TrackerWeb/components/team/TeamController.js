@@ -12,6 +12,11 @@
         };
         getTeamsAsync();
 
+        var showServedPenalty = function () {
+
+
+        };
+
         $scope.addTeam = function() {
             var newTeam = $scope.newTeam;
             teamService.postTeam(newTeam)
