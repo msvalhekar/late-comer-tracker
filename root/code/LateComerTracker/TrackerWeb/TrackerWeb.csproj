@@ -86,6 +86,8 @@
     <Content Include="components\meeting\meetingService.js" />
     <Content Include="components\meeting\MeetingController.js" />
     <Content Include="components\meeting\meetings.html" />
+    <Content Include="components\penalty\penalty.html" />
+    <Content Include="components\penalty\penaltyController.js" />
     <Content Include="components\team\editTeam.html" />
     <Content Include="components\team\teamService.js" />
     <Content Include="components\team\teams.html" />
