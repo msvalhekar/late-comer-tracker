@@ -14,7 +14,7 @@
         //        });
         //};
 
-        this.editSetting = function (setting) {
+        this.updateSetting = function (setting) {
             return $http.put("/api/configuration/" + setting.Key, setting).then(function () {
                 return true;
             });

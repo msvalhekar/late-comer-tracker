@@ -11,7 +11,7 @@
         <tr ng-repeat="setting in settings">
             <td>{{setting.Key}}</td>
             <td><input type="text" ng-model="setting.Value" name="setting.Value" maxlength="50"/></td>
-            <td><input type="button" class="btn btn-danger" value="EDIT" ng-click="editSetting(setting)"/></td>
+            <td><input type="button" class="btn btn-danger" value="Save" ng-click="updateSetting(setting)"/></td>
         </tr>
     </table>
 <!--    <form class="form-inline" role="form" name="addsettingForm" ng-submit="addsetting()">

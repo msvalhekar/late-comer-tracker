@@ -20,8 +20,8 @@
         //        });
         //};
 
-        $scope.editSetting = function (setting) {
-            configurationsService.editSetting(setting).then(function () {
+        $scope.updateSetting = function (setting) {
+            configurationsService.updateSetting(setting).then(function () {
                 getSettingsAsync();
             });
         };
