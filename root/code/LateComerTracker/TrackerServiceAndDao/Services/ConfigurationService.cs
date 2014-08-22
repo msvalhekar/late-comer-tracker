@@ -24,6 +24,7 @@ namespace LateComerTracker.Backend.Services
         public void Update(Configuration configuration)
         {
             new ConfigurationDao().Update(configuration);
+            Configurations.Reset();
         }
     }
 }

@@ -17,7 +17,7 @@ namespace LateComerTracker.Backend.Models
     public static class Configurations
     {
         private const string PointsPerPenaltyKey = "PointsPerPenalty";
-        private static readonly IList<Configuration> _configurations;
+        private static IList<Configuration> _configurations;
 
         static Configurations()
         {
@@ -31,6 +31,11 @@ namespace LateComerTracker.Backend.Models
                 if (setting == null) return 10;
                 return Convert.ToInt32(setting.Value);
             }
+        }
+
+        public static void Reset()
+        {
+            _configurations = new ConfigurationService().GetAll().ToList();
         }
     }
 }
