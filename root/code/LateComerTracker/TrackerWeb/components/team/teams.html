@@ -12,7 +12,7 @@
         <tr ng-repeat="team in teams">
             <td><a href="#teams/{{team.Id}}" >{{team.Name}}</a></td>
             <td>{{team.Description}}</td>
-            <td><input type="button" class="btn btn-danger" value="DELETE" ng-click="deleteTeam(team.Id)" /></td>
+            <td><input type="button" class="btn btn-danger" value="DELETE" ng-click="deleteTeam(team.Id)"/></td>
         </tr>
     </table>
     <form class="form-inline" role="form" name="addTeamForm" ng-submit="addTeam()">
