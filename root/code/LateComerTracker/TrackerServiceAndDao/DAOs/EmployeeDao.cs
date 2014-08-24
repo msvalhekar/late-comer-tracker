@@ -77,13 +77,5 @@ namespace LateComerTracker.Backend.DAOs
 
             return -1 < ExecuteNonQuery(commandText);
         }
-
-        public void ServedPenalty(int empId, DateTime servedOn, string how, string source)
-        {
-            var commandText = string.Format("INSERT INTO Penalty (pn_empId, pn_how, pn_source, pn_servedOn) VALUES ({0}, '{1}', '{2}', '{3}')",
-                empId, how, source, servedOn);
-
-            ExecuteNonQuery(commandText);
-        }
     }
 }

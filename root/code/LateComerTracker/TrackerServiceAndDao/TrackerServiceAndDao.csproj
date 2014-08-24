@@ -45,6 +45,7 @@
     <Compile Include="DAOs\MeetingDao.cs" />
     <Compile Include="Models\Configuration.cs" />
     <Compile Include="Models\Attendance.cs" />
+    <Compile Include="Models\Penalty.cs" />
     <Compile Include="Models\Meeting.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Team.cs" />

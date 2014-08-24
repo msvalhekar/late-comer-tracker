@@ -1,6 +1,6 @@
 ﻿(function() {
 
-    var teamService = function($http) {
+    var teamService = function($http, $location) {
 
         this.getTeamsAsync = function(onSuccessCallback) {
             return $http.get("/api/teams")
@@ -37,6 +37,14 @@
         this.markAttendance = function(teamId, meetingId, employeeIds) {
             var attendance = { teamId: teamId, meetingId: meetingId, employeeIds: employeeIds, source: "xyz" };
             return $http.post("api/attendance/", attendance)
+                .then(function(response) {
+                    return response.data;
+                });
+        };
+
+        this.logPenalty = function(teamId, empId, how, when) {
+            var penalty = { teamId: teamId, empId: empId, how: how, when: when, source: "xyz" };
+            return $http.post("api/penalty/", penalty)
                 .then(function(response) {
                     return response.data;
                 });

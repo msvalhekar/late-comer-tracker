@@ -17,11 +17,11 @@
                     <td>{{employee.Name}}</td>
                     <td>{{employee.EmailId}}</td>
                     <td>{{employee.DuePenalties}}</td>
-                    <td><a ng-show="employee.HasPenalties" ng-controller="penaltyController" ng-click="settlePenalty(employee,team)" data-toggle="modal" data-target="#servePenalityDialog">Settle Penalty</a></td>
+                    <td><a ng-show="employee.HasPenalties" ng-click="logPenaltyDialog(team, employee)" data-toggle="modal" data-target="#servePenalityDialog">Log Penalty</a></td>
                 </tr>
             </table>
             <a class="button btn-primary" href="#/teams/edit/{{team.Id}}">Edit Team</a>
         </div>
     </div>
-    <div ng-include src="'/components/penalty/penalty.html'">abc</div>
+    <div ng-include src="'/components/penalty/penalty.html'"></div>
 </div>

@@ -129,5 +129,13 @@ namespace LateComerTracker.Backend.DAOs
             ExecuteNonQuery(commandText.ToString());
         }
 
+        public void LogPenalty(Penalty penalty)
+        {
+            var commandText = string.Format("INSERT INTO Penalty (pn_teamId, pn_empId, pn_how, pn_source, pn_servedOn) VALUES ({0}, {1}, '{2}', '{3}', '{4}')",
+                penalty.TeamId, penalty.EmpId, penalty.How, penalty.Source, penalty.When.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+
+            ExecuteNonQuery(commandText);
+        }
+
     }
 }

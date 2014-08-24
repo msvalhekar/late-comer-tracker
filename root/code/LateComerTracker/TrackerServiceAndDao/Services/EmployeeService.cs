@@ -32,10 +32,5 @@ namespace LateComerTracker.Backend.Services
         {
             return new EmployeeDao().Delete(id);
         }
-
-        public void ServedPenalty(int empId, DateTime servedOn, string how, string source)
-        {
-            new EmployeeDao().ServedPenalty(empId, servedOn, how, source);
-        }
     }
 }

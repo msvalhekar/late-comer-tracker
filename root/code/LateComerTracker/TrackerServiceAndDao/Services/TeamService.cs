@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using LateComerTracker.Backend.DAOs;
 using LateComerTracker.Backend.Models;
 
@@ -40,5 +41,11 @@ namespace LateComerTracker.Backend.Services
         {
             new TeamDao().MarkLate(teamId, meetingId, employeeIds, source);
         }
+
+        public void LogPenalty(Penalty penalty)
+        {
+            new TeamDao().LogPenalty(penalty);
+        }
+
     }
 }

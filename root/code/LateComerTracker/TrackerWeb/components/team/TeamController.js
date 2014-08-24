@@ -1,8 +1,6 @@
 ﻿
 (function() {
 
-    // ------- All Teams
-
     function teamsController($scope, teamService) {
 
         var getTeamsAsync = function() {
@@ -11,11 +9,6 @@
             });
         };
         getTeamsAsync();
-
-        var showServedPenalty = function () {
-
-
-        };
 
         $scope.addTeam = function() {
             var newTeam = $scope.newTeam;
@@ -51,8 +44,8 @@
                 getAvailableEmployees();
             });
 
-        $scope.updateTeam = function (team) {
-            team.Employees = $.grep($scope.currentEmployeeList, function () { return true; });
+        $scope.updateTeam = function(team) {
+            team.Employees = $.grep($scope.currentEmployeeList, function() { return true; });
             teamService.updateTeam(team)
                 .then(function(data) {
                     //$scope.team = $scope.editTeamObj = data;
@@ -77,7 +70,7 @@
             });
         };
 
-        $scope.removeFromCurrentEmployeeList = function (employee) {
+        $scope.removeFromCurrentEmployeeList = function(employee) {
             for (var i = $scope.currentEmployeeList.length - 1; i >= 0; i--) {
                 if ($scope.currentEmployeeList[i].Id == employee.Id) {
                     $scope.currentEmployeeList.splice(i, 1);
@@ -97,8 +90,18 @@
             $scope.currentEmployeeList.push(employee);
         };
 
-        $scope.redirectToEdit = function (team) {
+        $scope.redirectToEdit = function(team) {
             $location.path('/teams/' + team.Id);
+        };
+
+        $scope.penaltyObj = {
+            when: new Date()
+        };
+        $scope.logPenaltyDialog = function(team, employee) {
+            $scope.penaltyObj.empId = employee.Id;
+            $scope.penaltyObj.empName = employee.Name;
+            $scope.penaltyObj.teamId = team.Id;
+            $scope.penaltyObj.teamName = team.Name;
         };
     }
 

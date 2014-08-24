@@ -1,7 +1,7 @@
 ﻿
 (function () {
 
-    trackerApp = angular.module('lateTrackerApp', ['ngRoute', 'xeditable']);
+    trackerApp = angular.module('lateTrackerApp', ['ngRoute', 'xeditable', 'ui.bootstrap']);
 
     trackerApp.run(function (editableOptions) {
         editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'

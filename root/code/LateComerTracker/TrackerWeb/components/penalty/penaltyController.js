@@ -1,20 +1,29 @@
 ﻿(function () {
-    function penaltyController($scope) {
-        $scope.penaltyobj = {
-            EmpId: 1,
-            EmpName: 1,
-            TeamId: 1,
-            TeamName: 1
+    function penaltyController($scope, teamService, $route) {
+
+        $scope.savePenalty = function() {
+            var penalty = $scope.penaltyObj;
+            //alert(penalty.teamId + ' ' + penalty.teamName + ' ' + penalty.empName + ' ' + penalty.empId + ' ' + penalty.how + ' ' + penalty.when);
+
+            teamService.logPenalty(penalty.teamId, penalty.empId, penalty.how, penalty.when)
+                .then(function() {
+                    $route.reload();
+                });
         };
-        $scope.settlePenalty = function (employee,team) {
-            //$scope.penaltyobj = {
-            //    EmpId: employee.Id,
-            //    EmpName: employee.Name,
-            //    TeamId: team.Id,
-            //    TeamName:team.Name
-            //};
-            $scope.penaltyobj.EmpName = "MK";
+        
+        $scope.open = function ($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.opened = true;
         };
+
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1,
+        };
+        $scope.maxDate = new Date();
     };
+    
     trackerApp.controller("penaltyController", penaltyController);
 })();
