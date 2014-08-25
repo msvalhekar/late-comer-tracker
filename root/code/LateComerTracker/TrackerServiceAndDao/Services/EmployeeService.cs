@@ -32,5 +32,15 @@ namespace LateComerTracker.Backend.Services
         {
             return new EmployeeDao().Delete(id);
         }
+
+        public IList<Attendance> GetAttendance(int empId)
+        {
+            return new EmployeeDao().GetAttendance(empId);
+        }
+
+        public IList<Penalty> GetPenalties(int empId)
+        {
+            return new EmployeeDao().GetPenalties(empId);
+        }
     }
 }

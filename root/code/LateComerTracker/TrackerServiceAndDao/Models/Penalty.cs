@@ -6,6 +6,8 @@ namespace LateComerTracker.Backend.Models
     {
         public int TeamId { get; set; }
         public int EmpId { get; set; }
+        public string TeamName { get; set; }
+        public string EmployeeName { get; set; }
         public string How { get; set; }
         public DateTime When { get; set; }
         public string Source { get; set; }

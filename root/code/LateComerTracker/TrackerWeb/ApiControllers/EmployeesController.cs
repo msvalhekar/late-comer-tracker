@@ -31,9 +31,7 @@ namespace LateComerTracker.Web.ApiControllers
             return employee;
         }
 
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+        public void Put(int id, [FromBody] string value) { }
 
         public bool Delete(int id)
         {

@@ -10,6 +10,11 @@ namespace LateComerTracker.Web.ApiControllers
     [ValidateModel]
     public class PenaltyController : ApiController
     {
+        public IEnumerable<Penalty> Get(int id)
+        {
+            return new EmployeeService().GetPenalties(id);
+        }
+
         public void Post(Penalty penalty)
         {
             new TeamService().LogPenalty(penalty);

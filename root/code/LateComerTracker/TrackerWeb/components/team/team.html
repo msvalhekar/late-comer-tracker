@@ -14,7 +14,7 @@
                     </tr>
                 </thead>
                 <tr ng-repeat="employee in team.Employees">
-                    <td>{{employee.Name}}</td>
+                    <td><a href="#employees/{{employee.Id}}">{{employee.Name}}</a></td>
                     <td>{{employee.EmailId}}</td>
                     <td>{{employee.DuePenalties}}</td>
                     <td><a ng-show="employee.HasPenalties" ng-click="logPenaltyDialog(team, employee)" data-toggle="modal" data-target="#servePenalityDialog">Log Penalty</a></td>

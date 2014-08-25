@@ -77,5 +77,48 @@ namespace LateComerTracker.Backend.DAOs
 
             return -1 < ExecuteNonQuery(commandText);
         }
+
+        public IList<Attendance> GetAttendance(int empId)
+        {
+            var commandText = string.Format(
+                    "SELECT t.team_name, e.emp_name, m.mtg_name, le.le_lateOn, le.le_source FROM LateEmployee le"
+                    + " JOIN Team t ON t.team_id = le.le_teamId"
+                    + " JOIN Employee e ON e.emp_id = le.le_empId"
+                    + " JOIN Meeting m ON m.mtg_id = le.le_mtgId"
+                    + " WHERE le.le_empid = {0}"
+                    + " ORDER BY le.le_lateOn DESC", empId);
+            var table = GetDataTable(commandText);
+
+            return (from DataRow row in table.Rows
+                    select new Attendance
+                    {
+                        TeamName = row["team_name"].ToString(),
+                        EmployeeName = row["emp_name"].ToString(),
+                        MeetingName = row["mtg_name"].ToString(),
+                        LateDateTime = Convert.ToDateTime(row["le_lateOn"]),
+                        Source = row["le_source"].ToString(),
+                    }).ToList();
+        }
+
+        public IList<Penalty> GetPenalties(int empId)
+        {
+            var commandText = string.Format(
+                    "SELECT t.team_name, e.emp_name, p.pn_how, p.pn_servedOn, p.pn_source FROM Penalty p"
+                    + " JOIN Team t ON t.team_id = p.pn_teamId"
+                    + " JOIN Employee e ON e.emp_id = p.pn_empId"
+                    + " WHERE p.pn_empid = {0}"
+                    + " ORDER BY p.pn_servedOn DESC", empId);
+            var table = GetDataTable(commandText);
+
+            return (from DataRow row in table.Rows
+                    select new Penalty
+                    {
+                        TeamName = row["team_name"].ToString(),
+                        EmployeeName = row["emp_name"].ToString(),
+                        How = row["pn_how"].ToString(),
+                        When = Convert.ToDateTime(row["pn_servedOn"]),
+                        Source = row["pn_source"].ToString()
+                    }).ToList();
+        }
     }
 }
