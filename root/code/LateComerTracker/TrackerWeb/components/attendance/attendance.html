@@ -1,20 +1,23 @@
 ﻿<div class="col-sm-12">
     <form name="attendanceForm" role="form" ng-submit="submitAttendance(attendance)">
-        <div class="col-sm-7">
-            <div class="col-sm-3"><strong>Current Date</strong></div>
-            <div class="col-sm-5">: {{attendance.currentDateTime}}</div>
-        </div>
-        <div class="col-sm-7">
-            <div class="col-sm-3"><strong>Team Name</strong></div>
-            <div class="col-sm-5">: {{attendance.teamName}}</div>
-        </div>
-        <div class="col-sm-7">
-            <div class="col-sm-3"><strong>Select Meeting</strong></div>
-            <div class="col-sm-5"> : 
-                <select required ng-model="attendance.meeting" ng-options="m.Name for m in meetings"></select>
+        <div style="margin-left:-15px;">
+            <div class="col-sm-7 padding-5">
+                <div class="col-sm-3"><strong>Current Date</strong></div>
+                <div class="col-sm-5">: {{attendance.currentDateTime}}</div>
+            </div>
+            <div class="col-sm-7 padding-5">
+                <div class="col-sm-3"><strong>Team Name</strong></div>
+                <div class="col-sm-5">: {{attendance.teamName}}</div>
+            </div>
+            <div class="col-sm-7 padding-5">
+                <div class="col-sm-3"><strong>Select Meeting</strong></div>
+                <div class="col-sm-5">
+                    :
+                    <select required ng-model="attendance.meeting" ng-options="m.Name for m in meetings"></select>
+                </div>
             </div>
         </div>
-        <div class="col-sm-7">
+        <div class="col-sm-7 padding-5">
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
@@ -32,7 +35,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-sm-7 col-lg-offset-2">
+        <div class="col-sm-7">
             <input type="submit" value="Save" class="btn btn-success" />
             <input type="button" value="Cancel" class="btn" ng-click="redirectToTeam(attendance.teamId)"/>
         </div>
