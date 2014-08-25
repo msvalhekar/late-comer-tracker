@@ -1,5 +1,29 @@
-﻿.formBorder
-{
+﻿.formBorder {
     /*border:solid 1px gray;*/
-    background-color: lightcyan;
-}  
+    background-color: inherit;
+}
+
+.body-class {
+    border: medium none;
+    background-color: rgb(243, 243, 254);
+}
+
+.container-class {
+    margin-top: 2%;
+}
+
+th {
+    background-color: #cef6d8;
+}
+
+.padding-5 {
+    padding: 5px;
+}
+
+.margin-5-top {
+    margin-top: 5px;
+}
+
+.padding-a {
+    padding: 8px;
+}
