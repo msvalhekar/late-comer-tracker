@@ -3,25 +3,29 @@
         <div class="formBorder">
             <div id="inputForm" class="col-sm-6">
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Name</label>
-                    <div class="col-sm-5">
+                    <div class="col-sm-2">
+                        <label class="col-sm-2 control-label">Name</label>
+                    </div>
+                    <div class="col-sm-5" style="margin-left: 25px">
                         <input class="form-control" type="text" placeholder="Enter Name" name="editTeamObjName"
-                               ng-model="editTeamObj.Name" required maxlength="20" ng-trim="true" 
-                               check-unique-name="teams | filter: editTeamObj.Name"/>
+                               ng-model="editTeamObj.Name" required maxlength="20" ng-trim="true"
+                               check-unique-name="teams | filter: editTeamObj.Name" />
                         <span ng-show="editTeamForm.editTeamObjName.$error.checkUniqueName">This Name is already used</span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Description</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="text" placeholder="Enter Description" name="editTeamObj.Description"
-                               ng-model="editTeamObj.Description" ng-trim="true" maxlength="50" />
+                    <div class="col-sm-2">
+                        <label class="col-sm-2 control-label">Description</label>
                     </div>
-                </div>
+                        <div class="col-sm-8" style="margin-left: 25px">
+                            <input class="form-control" type="text" placeholder="Enter Description" name="editTeamObj.Description"
+                                   ng-model="editTeamObj.Description" ng-trim="true" maxlength="50" />
+                        </div>
+                    </div>
             </div>
             <div class="col-sm-12">
                 <div class="col-sm-6">
-                    <label class="control-label">Current Employees</label>
+                    <label class="control-label margin-bottom-5">Current Employees</label>
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
@@ -33,12 +37,12 @@
                         <tr ng-repeat="employee in currentEmployeeList">
                             <td>{{employee.Name}}</td>
                             <td>{{employee.EmailId}}</td>
-                            <td><input type="button" ng-click="removeFromCurrentEmployeeList(employee)" value="remove" /></td>
+                            <td><input type="button" ng-click="removeFromCurrentEmployeeList(employee)" value="remove" class="btn btn-success" /></td>
                         </tr>
                     </table>
                 </div>
                 <div class="col-sm-6">
-                    <label class="control-label">Select From Employees</label>
+                    <label class="control-label margin-bottom-5">Select From Employees</label>
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
@@ -50,14 +54,14 @@
                         <tr ng-repeat="employee in availableEmployeeList | orderBy:'IsCurrentEmployee':true">
                             <td>{{employee.Name}}</td>
                             <td>{{employee.EmailId}}</td>
-                            <td><input type="button" ng-click="addToCurrentEmployeeList(employee)" ng-hide="employee.IsCurrentEmployee" value="add" /></td>
+                            <td><input type="button" ng-click="addToCurrentEmployeeList(employee)" ng-hide="employee.IsCurrentEmployee" value="add" class="btn btn-success" /></td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
         <div class="form-group col-sm-offset-4">
-            <div class="col-sm-2">
+            <div class="col-sm-2" style="margin-left: 29px">
                 <button type="submit" class="btn btn-danger">SAVE</button>
             </div>
             <div class="col-sm-2">

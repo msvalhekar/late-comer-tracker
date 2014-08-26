@@ -10,10 +10,15 @@
     var appController = function($scope, teamService) {
 
         //$scope.getTeamsForAttendance = function () {
-        teamService.getTeamsAsync(function(data) {
-            $scope.teams = data;
-        });
+        //teamService.getTeamsAsync(function(data) {
+        //    $scope.teams = data;
+        //});
         // };
+        $scope.getTeams = function () {
+            teamService.getTeamsAsync(function (data) {
+                $scope.teams = data;
+            });
+        };
     };
 
     trackerApp.controller('appController', appController);
