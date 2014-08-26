@@ -104,6 +104,8 @@
     <Content Include="Content\xeditable.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\logo_933313_web.jpg" />
     <Content Include="Index.html" />
     <Content Include="main.css" />
     <Content Include="scripts\angular-route.js" />
