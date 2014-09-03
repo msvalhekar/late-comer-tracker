@@ -17,27 +17,37 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-7 padding-5">
-            <table class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>EmailId</th>
-                        <th>Came Late?</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="emp in attendance.employees">
-                        <td>{{emp.Name}}</td>
-                        <td>{{emp.EmailId}}</td>
-                        <td><input type="checkbox" ng-model="emp.cameLate" /></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-sm-7">
-            <input type="submit" value="Save" class="btn btn-success" />
-            <input type="button" value="Cancel" class="btn" ng-click="redirectToTeam(attendance.teamId)"/>
+        <div class="col-sm-12">
+            <div class="col-sm-6 padding-5">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>EmailId</th>
+                            <th>Came Late?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="emp in attendance.employees">
+                            <td>{{emp.Name}}</td>
+                            <td>{{emp.EmailId}}</td>
+                            <td><input type="checkbox" ng-model="emp.cameLate" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div>
+                    <input type="submit" value="Save" class="btn btn-success" />
+                    <input type="button" value="Cancel" class="btn" ng-click="redirectToTeam(attendance.teamId)"/>
+                </div>
+            </div>
+            <div class="col-sm-5 table-bordered">
+                <h3>Rules</h3>
+                <ol>
+                    <li>Prior notice with valid* reason, minimum a day in advance, via skype chat or email (no calls, no corruption)</li>
+                </ol>
+                <p/><h4>Conditions</h4>
+                <span>* Validity is decided by rest of the team, on per case basis</span>
+            </div>
         </div>
     </form>
 </div>
