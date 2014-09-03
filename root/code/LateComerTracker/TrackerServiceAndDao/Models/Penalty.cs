@@ -11,5 +11,10 @@ namespace LateComerTracker.Backend.Models
         public string How { get; set; }
         public DateTime When { get; set; }
         public string Source { get; set; }
+
+        public string WhenString
+        {
+            get { return When.ToString("dd-MMM-yyyy dddd"); }
+        }
     }
 }

@@ -26,7 +26,8 @@
                     <td><a ng-show="employee.HasPenalties" ng-click="logPenaltyDialog(team, employee)" data-toggle="modal" data-target="#servePenalityDialog">Log Penalty</a></td>
                 </tr>
             </table>
-            <a class="button btn-primary padding-a" href="#/teams/edit/{{team.Id}}">Edit Team</a>
+            <a class="button btn-primary padding-a" href="#/teams/edit/{{team.Id}}">Edit</a>
+            <a class="button btn-primary padding-a" href="#/attendance/{{team.Id}}">Attendance</a>
         </div>
     </div>
     <div ng-include src="'/components/penalty/penalty.html'"></div>
