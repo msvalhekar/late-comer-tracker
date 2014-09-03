@@ -20,7 +20,7 @@ namespace LateComerTracker.Backend.Models
         public string DuePenalties {
             get
             {
-                if (UnsettledPoints == 0) return "0 penalties";
+                if (UnsettledPoints == 0) return "0";
 
                 var dueRoundPenalties = (uint)UnsettledPoints/Configurations.PointsPerPenalty;
                 var duePoints = UnsettledPoints % Configurations.PointsPerPenalty;
