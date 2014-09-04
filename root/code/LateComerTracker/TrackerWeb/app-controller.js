@@ -30,6 +30,9 @@
                     templateUrl: '/components/configuration/configurations.html',
                     controller: 'configurationController'
                 })
+                .when('/instructions', {
+                    templateUrl: '/instructions.html'
+                })
                 .when('/meetings', {
                     templateUrl: '/components/meeting/meetings.html',
                     controller: 'meetingsController'

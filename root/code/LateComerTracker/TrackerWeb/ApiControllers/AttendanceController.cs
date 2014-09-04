@@ -29,10 +29,11 @@ namespace LateComerTracker.Web.ApiControllers
             var formData = Newtonsoft.Json.JsonConvert.DeserializeObject<IDictionary<string, object>>(requestParams);
             var teamId = Convert.ToInt32(formData["teamId"]);
             var meetingId = Convert.ToInt32(formData["meetingId"]);
-            var employeeIds = ((Newtonsoft.Json.Linq.JArray) formData["employeeIds"]).ToObject<List<int>>();
+            var lateEmployees = ((Newtonsoft.Json.Linq.JArray)formData["lateEmployees"]).ToObject<List<KeyValuePair<int,string>>>();
             var source = formData["source"].ToString();
 
-            new TeamService().MarkLate(teamId, meetingId, employeeIds, source);
+            var teamService = new TeamService();
+            lateEmployees.ForEach(x => teamService.MarkLate(teamId, meetingId, x.Key, x.Value, source));
         }
     }
 }

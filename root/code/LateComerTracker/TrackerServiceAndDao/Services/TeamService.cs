@@ -37,9 +37,9 @@ namespace LateComerTracker.Backend.Services
             new TeamDao().Update(team);
         }
 
-        public void MarkLate(int teamId, int meetingId, IList<int> employeeIds, string source)
+        public void MarkLate(int teamId, int meetingId, int employeeId, string reason, string source)
         {
-            new TeamDao().MarkLate(teamId, meetingId, employeeIds, source);
+            new TeamDao().MarkLate(teamId, meetingId, employeeId, reason, source);
         }
 
         public void LogPenalty(Penalty penalty)

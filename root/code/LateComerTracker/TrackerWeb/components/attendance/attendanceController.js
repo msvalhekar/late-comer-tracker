@@ -19,24 +19,25 @@
                 for (var i = 0; i < data.Employees.length; i++) {
                     var employee = data.Employees[i];
                     employee.cameLate = false;
+                    employee.reason = '';
                     $scope.attendance.employees.push(employee);
                 }
             });
 
         $scope.submitAttendance = function(attendance) {
-            var lateEmployeeIds = [];
+            var lateEmployees = [];
             for (var i = 0; i < attendance.employees.length; i++) {
                 var employee = attendance.employees[i];
                 if (employee.cameLate)
-                    lateEmployeeIds.push(employee.Id);
+                    lateEmployees.push({ Key: employee.Id, Value: employee.reason });
             }
             
-            if (0 == lateEmployeeIds.length) {
+            if (0 == lateEmployees.length) {
                 $scope.redirectToTeam(attendance.teamId);
                 return;
             }
 
-            teamService.markAttendance(attendance.teamId, attendance.meeting.Id, lateEmployeeIds)
+            teamService.markAttendance(attendance.teamId, attendance.meeting.Id, lateEmployees)
                 .then(function() {
                     $scope.redirectToTeam(attendance.teamId);
                 });

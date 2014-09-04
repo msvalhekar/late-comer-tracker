@@ -117,16 +117,12 @@ namespace LateComerTracker.Backend.DAOs
             ExecuteNonQuery(insertCommandText.ToString());
         }
 
-        public void MarkLate(int teamId, int meetingId, IList<int> employeeIds, string source)
+        public void MarkLate(int teamId, int meetingId, int employeeId, string reason, string source)
         {
-            const string insertFormat = "INSERT INTO LateEmployee (le_teamId, le_empId, le_mtgId, le_source) VALUES ({0}, {1}, {2}, '{3}');";
-            var commandText = new StringBuilder();
-            foreach (var employeeId in employeeIds)
-            {
-                commandText.AppendLine(string.Format(insertFormat, teamId, employeeId, meetingId, source));
-            }
+            var commandText = string.Format("INSERT INTO LateEmployee (le_teamId, le_empId, le_mtgId, le_reason, le_source) VALUES ({0}, {1}, {2}, '{3}', '{4}');",
+                teamId, employeeId, meetingId, reason, source);
 
-            ExecuteNonQuery(commandText.ToString());
+            ExecuteNonQuery(commandText);
         }
 
         public void LogPenalty(Penalty penalty)

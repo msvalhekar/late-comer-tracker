@@ -11,6 +11,7 @@ namespace LateComerTracker.Backend.Models
         public string TeamName { get; set; }
         public string EmployeeName { get; set; }
         public string MeetingName { get; set; }
+        public string Reason { get; set; }
 
         public string LateDateTimeString {
             get { return LateDateTime.ToString("dd-MMM-yyyy dddd"); }

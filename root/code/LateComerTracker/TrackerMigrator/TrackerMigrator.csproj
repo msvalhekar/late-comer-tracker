@@ -49,6 +49,7 @@
     <Compile Include="Migrations\20140806225554_CreatePenaltyTable.cs" />
     <Compile Include="Migrations\20140806231425_CreateConfigTable.cs" />
     <Compile Include="Migrations\20140806234912_CreateInsertTriggerOnPenaltyTable.cs" />
+    <Compile Include="Migrations\20140904125739_AlterLateEmployeeTable_AddReason.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Engine\BaseMigration.cs" />

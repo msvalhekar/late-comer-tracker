@@ -34,8 +34,8 @@
                 });
         };
 
-        this.markAttendance = function(teamId, meetingId, employeeIds) {
-            var attendance = { teamId: teamId, meetingId: meetingId, employeeIds: employeeIds, source: "xyz" };
+        this.markAttendance = function(teamId, meetingId, lateEmployees) {
+            var attendance = { teamId: teamId, meetingId: meetingId, lateEmployees: lateEmployees, source: "xyz" };
             return $http.post("api/attendance/", attendance)
                 .then(function(response) {
                     return response.data;

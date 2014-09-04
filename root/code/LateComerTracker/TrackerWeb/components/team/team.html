@@ -1,22 +1,22 @@
 ﻿<div class="col-sm-12">
-    <div class="col-sm-6">
-        <div class="padding-5">
-            <strong>Name : </strong>
-            {{team.Name}}
+    <div class="col-sm-9">
+        <div class="col-sm-6">
+            <div class="padding-5">
+                <strong>Team : </strong>{{team.Name}} ( {{team.Description}} )
             </div>
-        <div class="padding-5">
-           <strong>Description : </strong>
-           {{team.Description}}
+        </div>
+        <div class="col-sm-6">
+            <a class="button btn-primary padding-a" href="#/teams/edit/{{team.Id}}">Edit</a>
+            <a class="button btn-primary padding-a" href="#/attendance/{{team.Id}}">Attendance</a>
         </div>
         <div class ="padding-5">
-            <strong>Employees</strong>
-            <table class="table table-bordered table-striped margin-top-5">
+            <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th class="th-class">Name</th>
-                        <th class="th-class">EmailId</th>
-                        <th class="th-class">Unsettled Penalties</th>
-                        <th>Action</th>
+                        <th class="th-class col-sm-3">Name</th>
+                        <th class="th-class col-sm-4">Email Id</th>
+                        <th class="th-class col-sm-2">Unsettled Penalties</th>
+                        <th class="th-class col-sm-3">Action</th>
                     </tr>
                 </thead>
                 <tr ng-repeat="employee in team.Employees">
@@ -26,8 +26,6 @@
                     <td><a ng-show="employee.HasPenalties" ng-click="logPenaltyDialog(team, employee)" data-toggle="modal" data-target="#servePenalityDialog">Log Penalty</a></td>
                 </tr>
             </table>
-            <a class="button btn-primary padding-a" href="#/teams/edit/{{team.Id}}">Edit</a>
-            <a class="button btn-primary padding-a" href="#/attendance/{{team.Id}}">Attendance</a>
         </div>
     </div>
     <div ng-include src="'/components/penalty/penalty.html'"></div>

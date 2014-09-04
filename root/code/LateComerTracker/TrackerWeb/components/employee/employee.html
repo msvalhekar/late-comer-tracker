@@ -5,15 +5,17 @@
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th class="col-sm-3">Team</th>
-                    <th class="col-sm-4">Meeting</th>
-                    <th class="col-sm-5">When</th>
+                    <th class="col-sm-2">Team</th>
+                    <th class="col-sm-3">Meeting</th>
+                    <th class="col-sm-3">When</th>
+                    <th class="col-sm-4">Reason</th>
                 </tr>
             </thead>
             <tr ng-repeat="attRow in attendance">
                 <td>{{attRow.TeamName}}</td>
                 <td>{{attRow.MeetingName}}</td>
                 <td>{{attRow.LateDateTimeString}}</td>
+                <td>{{attRow.Reason}}</td>
             </tr>
         </table>
     </div>
