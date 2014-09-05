@@ -76,6 +76,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="app-controller.js" />
     <Content Include="app.js" />
+    <Content Include="Images\tracker_logo.jpg" />
     <Content Include="instructions.html" />
     <Content Include="components\attendance\attendance.html" />
     <Content Include="components\attendance\attendanceController.js" />
