@@ -1,19 +1,39 @@
 ﻿
-(function() {
+(function () {
+    // This 
+    angular.module('AjaxSpinnerService', [])
+        .config(function($httpProvider) {
+            $httpProvider.responseInterceptors.push('myHttpInterceptor');
+            var spinnerFunction = function(data, headersGetter) {
+                $('#loadingTicker').show();
+                return data;
+            };
+            $httpProvider.defaults.transformRequest.push(spinnerFunction);
+        })
+        // register the interceptor as a service, intercepts ALL angular ajax http calls
+        .factory('myHttpInterceptor', function ($q, $window) {
+            return function (promise) {
+                return promise.then(function (response) {
+                    $('#loadingTicker').hide();
+                    return response;
 
-    trackerApp = angular.module('lateTrackerApp', ['ngRoute', 'xeditable', 'ui.bootstrap']);
+                }, function (response) {
+                    $('#loadingTicker').hide();
+                    return $q.reject(response);
+                });
+        };
+    });
 
-    trackerApp.run(function(editableOptions) {
+    trackerApp = angular.module('lateTrackerApp', ['ngRoute', 'xeditable', 'ui.bootstrap', 'AjaxSpinnerService']);
+
+    trackerApp.run(function (editableOptions) {
+        $('#loadingTicker').show();
+        $('#loadingTicker').hide();
         editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
     });
 
     var appController = function($scope, teamService) {
 
-        //$scope.getTeamsForAttendance = function () {
-        //teamService.getTeamsAsync(function(data) {
-        //    $scope.teams = data;
-        //});
-        // };
         $scope.getTeams = function () {
             teamService.getTeamsAsync(function (data) {
                 $scope.teams = data;
