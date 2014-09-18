@@ -34,6 +34,8 @@ namespace LateComerTracker.Web.ApiControllers
 
             var teamService = new TeamService();
             lateEmployees.ForEach(x => teamService.MarkLate(teamId, meetingId, x.Key, x.Value, source));
+
+            teamService.NotifyLateComers(teamId, meetingId, lateEmployees);
         }
     }
 }

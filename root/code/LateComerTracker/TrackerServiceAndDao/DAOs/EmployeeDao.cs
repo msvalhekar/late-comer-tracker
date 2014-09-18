@@ -81,7 +81,7 @@ namespace LateComerTracker.Backend.DAOs
         public IList<Attendance> GetAttendance(int empId)
         {
             var commandText = string.Format(
-                    "SELECT t.team_name, e.emp_name, m.mtg_name, le.le_lateOn, le.le_source FROM LateEmployee le"
+                    "SELECT t.team_name, e.emp_name, m.mtg_name, le.le_lateOn, le.le_reason FROM LateEmployee le"
                     + " JOIN Team t ON t.team_id = le.le_teamId"
                     + " JOIN Employee e ON e.emp_id = le.le_empId"
                     + " JOIN Meeting m ON m.mtg_id = le.le_mtgId"
@@ -96,7 +96,7 @@ namespace LateComerTracker.Backend.DAOs
                         EmployeeName = row["emp_name"].ToString(),
                         MeetingName = row["mtg_name"].ToString(),
                         LateDateTime = Convert.ToDateTime(row["le_lateOn"]),
-                        Source = row["le_source"].ToString(),
+                        Reason = row["le_reason"].ToString(),
                     }).ToList();
         }
 

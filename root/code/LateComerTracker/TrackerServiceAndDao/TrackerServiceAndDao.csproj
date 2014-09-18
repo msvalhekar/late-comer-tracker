@@ -43,6 +43,7 @@
     <Compile Include="DAOs\BaseDao.cs" />
     <Compile Include="DAOs\ConfigurationDao.cs" />
     <Compile Include="DAOs\MeetingDao.cs" />
+    <Compile Include="EmailSender.cs" />
     <Compile Include="Models\Configuration.cs" />
     <Compile Include="Models\Attendance.cs" />
     <Compile Include="Models\Penalty.cs" />
