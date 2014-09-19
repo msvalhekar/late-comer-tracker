@@ -8,7 +8,7 @@ namespace LateComerTracker.Backend
     {
         public void Send(IList<string> toList, IList<string> ccList, string subject, string body)
         {
-            var from = new MailAddress("youarelate@spiderlogic.com", "Late Comer Tracker", Encoding.UTF8);
+            var from = new MailAddress("YouAreLate@spiderlogic.com", "Late Comer Tracker", Encoding.UTF8);
             Send(from, toList, ccList, subject, body);
         }
 
