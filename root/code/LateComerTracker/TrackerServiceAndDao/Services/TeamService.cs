@@ -44,6 +44,21 @@ namespace LateComerTracker.Backend.Services
             new TeamDao().MarkLate(teamId, meetingId, employeeId, reason, source);
         }
 
+        public void LogPenalty(Penalty penalty)
+        {
+            new TeamDao().LogPenalty(penalty);
+        }
+
+        public void NotifyServedPenalty(Penalty penalty)
+        {
+            var team = Get(penalty.TeamId);
+            new EmailSender().Send(
+                team.Employees.Select(x => x.EmailId).ToList(),
+                null,
+                "Penalty Served",
+                GetBodyForPenaltyServed(team.Employees, penalty));
+        }
+
         public void NotifyLateComers(int teamId, int meetingId, List<KeyValuePair<int,string>> lateEmpReasonList)
         {
             var team = Get(teamId);
@@ -54,10 +69,10 @@ namespace LateComerTracker.Backend.Services
                 lateEmps.Select(x => x.EmailId).ToList(),
                 onTimeEmps.Select(x => x.EmailId).ToList(),
                 string.Format("{0} ({1} pnts)", meeting.Name, meeting.Severity),
-                GetBody(team.Employees, lateEmpReasonList));
+                GetBodyForLateComers(team.Employees, lateEmpReasonList));
         }
 
-        private string GetBody(IList<Employee> employees, List<KeyValuePair<int, string>> lateEmpReasonList)
+        private string GetBodyForLateComers(IList<Employee> employees, List<KeyValuePair<int, string>> lateEmpReasonList)
         {
             var lateComers = GetBodyLateComers(employees, lateEmpReasonList);
             var summary = GetBodySummary(employees);
@@ -67,7 +82,9 @@ namespace LateComerTracker.Backend.Services
 
         private string GetBodyLateComers(IList<Employee> employees, List<KeyValuePair<int, string>> lateEmpReasonList)
         {
-            StringBuilder sbBody = new StringBuilder();
+            if (lateEmpReasonList == null) return string.Empty;
+
+            var sbBody = new StringBuilder();
             sbBody.Append("<table style=\"border: 1px solid #ddd\">");
             sbBody.Append("<thead style=\"background-color: #ffc0cb;\"><tr>");
             sbBody.Append("<th style=\"border: 1px solid #ddd\">Name</th>");
@@ -86,27 +103,53 @@ namespace LateComerTracker.Backend.Services
 
         private string GetBodySummary(IList<Employee> employees)
         {
-            StringBuilder sbBody = new StringBuilder("<h3>Team Summary</h3>");
+            var sbBody = new StringBuilder("<h3>Team Summary</h3>");
             sbBody.Append("<table style=\"border: 1px solid #ddd\">");
             sbBody.Append("<thead style=\"background-color: #cef6d8;\"><tr>");
             sbBody.Append("<th style=\"border: 1px solid #ddd;\">Name</th>");
             sbBody.Append("<th style=\"border: 1px solid #ddd\">Unsettled Penalties</th>");
+            sbBody.Append("<th style=\"border: 1px solid #ddd\">Served Penalties</th>");
             sbBody.Append("</tr></thead>");
-            foreach (var employee in employees)
+            foreach (var employee in employees.OrderByDescending(x => x.UnsettledPoints))
             {
                 sbBody.Append("<tr style=\"border: 1px solid #ddd\">");
                 sbBody.Append("<td style=\"border: 1px solid #ddd\">" + employee.Name + "</td>");
-                sbBody.Append("<td style=\"border: 1px solid #ddd\">" + employee.DuePenalties + "</td>");
+                sbBody.Append("<td style=\"border: 1px solid #ddd\">" + employee.FormattedDuePenalties + "</td>");
+                sbBody.Append("<td style=\"border: 1px solid #ddd\">" + employee.PenaltyList.Count + "</td>");
                 sbBody.Append("</tr>");
             }
             sbBody.Append("</table>");
             return sbBody.ToString();
         }
 
-        public void LogPenalty(Penalty penalty)
+        private string GetBodyForPenaltyServed(IList<Employee> employees, Penalty penalty)
         {
-            new TeamDao().LogPenalty(penalty);
+            var penaltyServed = GetBodyPenaltyServed(penalty);
+            var summary = GetBodySummary(employees);
+            var body = string.Format("<html><body>{0}</body></html>", penaltyServed + summary);
+            return body;
         }
 
+        private string GetBodyPenaltyServed(Penalty penalty)
+        {
+            var employee = new EmployeeService().Get(penalty.EmpId);
+
+            var sbBody = new StringBuilder();
+            sbBody.Append("<table style=\"border: 1px solid #ddd\">");
+            sbBody.Append("<thead style=\"background-color: #ffc0cb;\"><tr>");
+            sbBody.Append("<th style=\"border: 1px solid #ddd\">Name</th>");
+            sbBody.Append("<th style=\"border: 1px solid #ddd\">How</th>");
+            sbBody.Append("<th style=\"border: 1px solid #ddd\">When</th>");
+            sbBody.Append("</tr></thead>");
+            
+            sbBody.Append("<tr style=\"border: 1px solid #ddd\">");
+            sbBody.Append("<td style=\"border: 1px solid #ddd\">" + employee.Name + "</td>");
+            sbBody.Append("<td style=\"border: 1px solid #ddd\">" + penalty.How + "</td>");
+            sbBody.Append("<td style=\"border: 1px solid #ddd\">" + penalty.WhenString + "</td>");
+            sbBody.Append("</tr>");
+
+            sbBody.Append("</table><br/>");
+            return sbBody.ToString();
+        }
     }
 }

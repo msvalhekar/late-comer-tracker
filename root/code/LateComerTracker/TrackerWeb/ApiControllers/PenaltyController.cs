@@ -17,7 +17,10 @@ namespace LateComerTracker.Web.ApiControllers
 
         public void Post(Penalty penalty)
         {
-            new TeamService().LogPenalty(penalty);
+            var teamService = new TeamService();
+            teamService.LogPenalty(penalty);
+
+            teamService.NotifyServedPenalty(penalty);
         }
     }
 }

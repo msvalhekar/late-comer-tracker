@@ -8,7 +8,7 @@ namespace LateComerTracker.Backend
     {
         public void Send(IList<string> toList, IList<string> ccList, string subject, string body)
         {
-            var from = new MailAddress("YouAreLate@spiderlogic.com", "Late Comer Tracker", Encoding.UTF8);
+            var from = new MailAddress("mvalhekar@spiderlogic.com", "Late Comer Tracker", Encoding.UTF8);
             Send(from, toList, ccList, subject, body);
         }
 
@@ -23,8 +23,9 @@ namespace LateComerTracker.Backend
                 SubjectEncoding = Encoding.UTF8,
                 Subject = subject
             };
-            message.To.Add(string.Join(",", toList));
-            message.CC.Add(string.Join(",", ccList));
+
+            if(toList != null) message.To.Add(string.Join(",", toList));
+            if (ccList != null) message.CC.Add(string.Join(",", ccList));
 
             try
             {

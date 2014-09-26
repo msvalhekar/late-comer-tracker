@@ -55,6 +55,8 @@ namespace LateComerTracker.Backend.DAOs
                 var fineCommandText = string.Format("select unsettled_points from EmployeeFine where team_id = {0} and emp_id = {1}", teamId, employee.Id);
                 employee.UnsettledPoints = ExecuteScalar(fineCommandText);
             }
+            employee.PenaltyList = GetPenalties(employee.Id);
+            employee.AttendanceList = GetAttendance(employee.Id);
             return employee;
         }
 
