@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -46,6 +47,7 @@
     <Compile Include="EmailSender.cs" />
     <Compile Include="Models\Configuration.cs" />
     <Compile Include="Models\Attendance.cs" />
+    <Compile Include="Models\RuleSet.cs" />
     <Compile Include="Models\Penalty.cs" />
     <Compile Include="Models\Meeting.cs" />
     <Compile Include="Models\Employee.cs" />

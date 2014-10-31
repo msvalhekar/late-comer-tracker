@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using LateComerTracker.Backend.DAOs;
@@ -34,9 +35,33 @@ namespace LateComerTracker.Backend.Services
             return new TeamDao().Delete(id);
         }
 
-        public void Edit(Team team)
+        public void Edit(Team editedTeam)
         {
-            new TeamDao().Update(team);
+            var oldTeam = Get(editedTeam.Id);
+            new TeamDao().Update(editedTeam);
+
+            var newEmployees = editedTeam.Employees
+                .Where(x => !oldTeam.Employees.Any(y => y.EmailId.Equals(x.EmailId)))
+                .ToList();
+            newEmployees.ForEach(x => x.PenaltyList = new List<Penalty>());
+
+            if (newEmployees.Any())
+            {
+                new EmailSender().Send(
+                    newEmployees.Select(x => x.EmailId).ToList(),
+                    editedTeam.Employees.Select(x => x.EmailId).ToList(),
+                    "Welcome on(KLO)Board",
+                    GetBodyWelcomeEmployee(editedTeam.Employees));
+            }
+        }
+
+        private string GetBodyWelcomeEmployee(IList<Employee> employees)
+        {
+            var rules = GetBodyForRules();
+            var summary = GetBodySummary(employees);
+
+            var body = string.Format("<html><body>{0}</body></html>", rules + summary);
+            return body;
         }
 
         public void MarkLate(int teamId, int meetingId, int employeeId, string reason, string source)
@@ -110,7 +135,7 @@ namespace LateComerTracker.Backend.Services
             sbBody.Append("<th style=\"border: 1px solid #ddd\">Unsettled Penalties</th>");
             sbBody.Append("<th style=\"border: 1px solid #ddd\">Served Penalties</th>");
             sbBody.Append("</tr></thead>");
-            foreach (var employee in employees.OrderByDescending(x => x.UnsettledPoints))
+            foreach (var employee in employees.OrderByDescending(x => x.UnsettledPoints).ThenBy(x => x.Name))
             {
                 sbBody.Append("<tr style=\"border: 1px solid #ddd\">");
                 sbBody.Append("<td style=\"border: 1px solid #ddd\">" + employee.Name + "</td>");
@@ -119,6 +144,46 @@ namespace LateComerTracker.Backend.Services
                 sbBody.Append("</tr>");
             }
             sbBody.Append("</table>");
+            return sbBody.ToString();
+        }
+
+        private string GetBodyForRules()
+        {
+            var sbBody = new StringBuilder("<h3>Late Comer Tracker Rules</h3>");
+            var rules = new ConfigurationService().Rules();
+            sbBody.Append("<div width=\"200\">");
+            sbBody.Append("<div width=\"200\">");
+            sbBody.Append("<div width=\"100\">");
+            var safeRuleSet = rules.First(x => x.Type == RuleSetType.Safe);
+            sbBody.Append(GetFormattedRules(safeRuleSet).Replace("(colorToReplace)", ConsoleColor.Green.ToString()));
+            sbBody.Append("</div>");
+
+            sbBody.Append("<div width=\"100\">");
+            var unsafeRuleSet = rules.First(x => x.Type == RuleSetType.NotSafe);
+            sbBody.Append(GetFormattedRules(unsafeRuleSet).Replace("(colorToReplace)", ConsoleColor.Red.ToString()));
+            sbBody.Append("</div>");
+            sbBody.Append("</div>");
+            sbBody.Append("<div>");
+            
+            var noteRuleSet = rules.First(x => x.Type == RuleSetType.Notes);
+            sbBody.Append(GetFormattedRules(noteRuleSet).Replace("(colorToReplace)", ConsoleColor.Gray.ToString()));
+            sbBody.Append("</div>");
+            sbBody.Append("</div>");
+            return sbBody.ToString();
+        }
+
+        private string GetFormattedRules(RuleSet ruleSet)
+        {
+            var sbBody = new StringBuilder();
+            //sbBody.AppendFormat("<div>");
+            sbBody.AppendFormat("<h4 style=\"color: (colorToReplace);\">{0}</h4>", ruleSet.Title);
+            sbBody.Append("<ol>");
+            foreach (var rule in ruleSet.Rules)
+            {
+                sbBody.AppendFormat("<li>{0}</li>", rule);
+            }
+            sbBody.Append("</ol>");
+            //sbBody.Append("</div>");
             return sbBody.ToString();
         }
 
