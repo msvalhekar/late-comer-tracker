@@ -50,7 +50,7 @@ namespace LateComerTracker.Backend.Services
                 new EmailSender().Send(
                     newEmployees.Select(x => x.EmailId).ToList(),
                     editedTeam.Employees.Select(x => x.EmailId).ToList(),
-                    "Welcome on(KLO)Board",
+                    string.Format("Welcome on({0})Board", editedTeam.Name),
                     GetBodyWelcomeEmployee(editedTeam.Employees));
             }
         }
